@@ -96,7 +96,7 @@
 \usepackage[skip=12pt]{parskip}
 \usepackage{longtable}
 \usepackage{booktabs}
-\usepackage[id-ID]{datetime2}
+\usepackage[bahasai]{datetime2}
 
 
 \setcounter{tocdepth}{4} % kedalaman daftar isi sampai subsubbab
@@ -161,7 +161,7 @@
 % -- No Header dan No Footer ---
 \pagestyle{plain}
 
-% --- Ubah nama daftar listing ke "DAFTAR ALGORITMA" ---
+% --- Ubah nama daftar listing ke "DAFTAR KODE" ---
 % --- Harus diletakkan sebelum \begin{document} ---
 \renewcommand{\lstlistlistingname}{\centering\normalsize DAFTAR KODE} 
 \renewcommand{\lstlistingname}{Kode}
@@ -170,6 +170,30 @@
 
 
 \renewcommand \cftchapdotsep{4.5}
+%\cftsetrmarg{4em}  % Ini diset agar judul subbab tidak mepet ke nomor halaman di daftar isi
+% -- Atur indentasi judul bab, subbab, dan subsubbab di daftar isi ---
+\setlength{\cftchapindent}{0em}
+\setlength{\cftsecindent}{0em}
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsubsubsecindent}{0em}
+
+% --- Ubah nama bulan ke Bahasa Indonesia ---
+\renewcommand*{\DTMbahasaimonthname}[1]{%
+  \ifcase#1 %
+    \or Januari%  % 1st month
+    \or Februari%  % 2nd month
+    \or Maret%  % 3rd month
+    \or April%  % 4th month
+    \or Mei%  % 5th month
+    \or Juni%  % 6th month
+    \or Juli%  % 7th month
+    \or Agustus%  % 8th month
+    \or September%  % 9th month
+    \or Oktober%  % 10th month
+    \or November%  % 11th month
+    \or Desember%  % 12th month
+  \fi
+}
 
 % ==========================================
 % AWAL DOKUMEN
@@ -185,7 +209,7 @@
     
     \vspace*{2cm}
     
-    {\Large\bfseries PERANCANGAN SISTEM INFORMASI AKADEMIK BERBASIS WEB}\\
+    {\Large\bfseries EKSPLORASI DAN IMPLEMENTASI ALGORITMA FACE RECOGNITION UNTUK PENCARIAN OTOMATIS FOTO PRIBADI BERDASARKAN SELFIE}\\
      \vspace{4cm}
 
     {\Large \textbf{Proposal Tugas Akhir}}\\
@@ -196,8 +220,8 @@
     
     {\large Oleh}\\[0.3cm]
     \textbf{
-    {\large John Doe}\\
-    {\large 18299000}
+    {\large Alfandito Rais Akbar}\\
+    {\large 18222037}
     }\\
 
     \vspace{2cm}
@@ -232,7 +256,7 @@
   \textbf{\large LEMBAR PENGESAHAN}\\[1cm]
   \vspace*{1.5cm}
     
-  {\large\bfseries PERANCANGAN SISTEM INFORMASI AKADEMIK BERBASIS WEB}\\
+  {\large\bfseries EKSPLORASI DAN IMPLEMENTASI ALGORITMA FACE RECOGNITION UNTUK PENCARIAN OTOMATIS FOTO PRIBADI BERDASARKAN SELFIE}\\
      \vspace{2cm}
 
   {\Large \textbf{Proposal Tugas Akhir}}\\
@@ -243,8 +267,8 @@
     
   {\large Oleh}\\[0.3cm]
     \textbf{
-    {\large John Doe}\\
-    {\large 18299000}
+    {\large Alfandito Rais Akbar}\\
+    {\large 18222037}
   }\\
     
   \vspace{0.5cm}
@@ -262,8 +286,8 @@
 % Versi 1 pembimbing (default)
 % ==========================================
 	Pembimbing  \\[3cm]
-	Dr. Ir. John Doe, M.T.   \\[0.2cm]
-	NIP. 123456789 
+	Dr. Riza Satria Perdana, S.T, M.T.   \\[0.2cm]
+	NIP. 197006091995121002 
 % ==========================================
 
 \end{center}

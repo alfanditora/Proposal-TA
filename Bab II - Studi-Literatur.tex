@@ -3,275 +3,117 @@
 % ==========================================
 \chapter{STUDI LITERATUR}
 \label{chap:studi-literatur}
-\section{Penulisan Gambar, Tabel, Rumus, dan Kode}
-\lipsum[1]
 
-\subsection{Gambar}
-Contoh gambar dapat dilihat pada Gambar \ref{gambar:jaringan}. Gambar dan judulnya diposisikan di tengah. Nomor gambar tidak diakhiri tanda titik. Gambar tersebut dibuat menggunakan aplikasi draw.io dan disimpan ke format PNG setelah dengan zoom setting pada angka 300\%. Ukuran gambar yang ditampilkan dapat diatur dengan mengubah nilai \textit{width} dalam sintaks \textit{includegraphics}.
+\section{Pengenalan Wajah \textit{Face Recognition}}
+Pengenalan wajah (\textit{Face Recognition}) adalah teknologi yang mampu mengidentifikasi atau memverifikasi identitas subjek dalam gambar atau video. Teknologi ini telah menjadi salah satu bidang penelitian yang paling banyak dikaji dalam ranah \textit{computer vision} dan biometrika. \textit{face recognition} dianggap sebagai salah satu aplikasi biometrik yang paling umum digunakan, sering kali lebih disukai daripada metode lain seperti sidik jari atau pengenalan iris karena sifatnya yang tidak mengganggu \autocite{Trigueros2018}.
+
+Teknologi ini memiliki beragam aplikasi, mulai dari sistem keamanan rumah, pengawasan, kontrol perbatasan, hingga kontrol akses, deteksi penipuan, verifikasi identitas, dan media sosial.
+
+Meskipun populer, \textit{face recognition} tetap menjadi salah satu tantangan biometrik yang paling kompleks, terutama ketika diterapkan di lingkungan yang tidak terkendali (\textit{in-the-wild}). Hal ini disebabkan oleh tingginya variabilitas yang dapat muncul pada gambar wajah, seperti perbedaan pose kepala, penuaan, oklusi (misalnya masker atau kacamata), kondisi pencahayaan, serta ekspresi wajah.
+
+\section{Alur dan Komponen Sistem \textit{Face Recognition}}
+Sistem pengenalan wajah biasanya terdiri dari beberapa \textit{building blocks} atau komponen utama. Menurut \textcite{Albayati2024}, secara umum, alur \textit{Face Recognition} (\textit{face recognition}) melibatkan tiga teknik kunci, yaitu deteksi wajah, ekstraksi fitur, dan pengenalan wajah (Gambar \ref{gambar:face recognition}). Secara lebih rinci, alur \textit{face recognition} mencakup empat tahapan inti, yaitu deteksi wajah, penyelarasan wajah, representasi wajah (ekstraksi fitur), dan pencocokan wajah \autocite{Trigueros2018}.
+
+Berikut adalah penjelasan setiap komponen beserta teknik-teknik yang terkait.
 
 \begin{figure}[t] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
 	\centering
   \captionsetup{justification=centering}
-    	\includegraphics[width=0.7\textwidth]{image/gambar1.png}
-	\caption{Contoh gambar jaringan}
-	\label{gambar:jaringan}
+    	\includegraphics[width=0.7\textwidth]{image/FR-component.png}
+	\caption{Alur \textit{Face Recognition} secara umum}
+	\label{gambar:face recognition}
 \end{figure}
 
-Gambar umumnya tidak jelas atau kabur jika gambar tersebut:
+\subsection{Deteksi Wajah (\textit{Face Detection})}
+Tahapan ini bertujuan untuk mendeteksi keberadaan wajah pada citra digital. Sistem akan menemukan posisi wajah dan mengembalikan koordinat kotak pembatas (\textit{bounding box}) untuk setiap wajah yang terdeteksi. Keberhasilan tahap ini sangat penting karena menjadi masukan bagi tahap selanjutnya, dan kinerjanya dapat dipengaruhi oleh variasi pencahayaan serta pose wajah \autocite{Albayati2024}.
+
+\subsection{Pra-pemrosesan dan Normalisasi (\textit{Preprocessing and Alignment})}
+Setelah wajah terdeteksi, tahap penyelarasan (\textit{alignment}) atau pemrosesan wajah dilakukan. Tujuannya adalah untuk menyesuaikan skala, rotasi, dan memotong gambar wajah secara konsisten guna mengatasi masalah yang disebabkan oleh variasi pose, pencahayaan, dan oklusi \autocite{Trigueros2018}.
+
+Proses ini biasanya memerlukan penemuan satu set titik-titik penting wajah (\textit{facial landmarks}). Teknik yang umum digunakan meliputi:
+
 \begin{enumerate}[a.]
-  \item diperoleh dari hasil cropping pada suatu halaman buku atau situs web;
-  \item hasil pembesaran gambar yang gambar aslinya sebenarnya berukuran kecil; atau
-  \item disimpan dalam resolusi kecil
-\end{enumerate}
-Ketidakjelasan gambar ini dapat dilihat pada garis-garis diagram yang tidak tegas dan tulisan-tulisan dalam gambar yang tampak kabur dan kurang jelas terbaca.
-
-Untuk mendapatkan gambar yang tidak kabur (\textit{blur}), langkah-langkah berikut dapat digunakan:
-\begin{enumerate}[(a)]
-\item Gambar yang didapat di suatu pustaka atau referensi sebaiknya digambar ulang, misalnya menggunakan PowerPoint, Canva, Figma, draw.io, atau yang lainnya.
-\item Jika diagram atau ilustrasi digambar menggunakan draw.io, saat gambar disimpan ke format PNG atau JPG (\textit{export as}), lakukan \textit{zoom} ke minimal 300\% (\textit{the default value is} 100\%). 
-\item Jika diagram digambar dengan menggunakan PowerPoint, gambar dapat langsung di-\textit{copy-paste} ke Word.
+\item Penyelarasan 2D \\
+Menggunakan transformasi afin (\textit{affine transformation}), yaitu jenis transformasi geometris yang mempertahankan garis lurus dan perbandingan jarak namun tidak selalu mempertahankan sudut atau panjang. Transformasi ini digunakan untuk menyesuaikan wajah berdasarkan titik referensi \textit{landmark}. Pendekatan ini relatif sederhana dan efisien untuk mengoreksi rotasi serta pergeseran posisi wajah.
+\item Frontalisasi Wajah 3D \\
+Merupakan algoritma yang lebih kompleks yang mampu mengubah pose wajah non-frontal (miring) menjadi pose frontal (menghadap ke depan). Teknik ini meningkatkan konsistensi representasi wajah pada berbagai sudut pandang. Metode ini umumnya memanfaatkan model 3D wajah atau \textit{deep neural network} untuk merekonstruksi struktur wajah secara lebih akurat, sehingga hasil normalisasi wajah tetap mempertahankan karakteristik penting meskipun terjadi variasi pose yang signifikan.
+\item Normalisasi \textit{ Many-to-One} \\
+Bertujuan untuk memulihkan citra wajah yang terstandardisasi (misalnya wajah frontal) dari beberapa citra non-frontal. Pendekatan ini sering digunakan untuk meningkatkan kualitas data sebelum tahap ekstraksi fitur. Dalam praktiknya, metode ini dapat melibatkan rekonstruksi berbasis model 3D, penyelarasan multi-\textit{view}, atau teknik pembelajaran mendalam yang menggabungkan informasi dari berbagai sudut pandang untuk menghasilkan representasi wajah yang lebih konsisten, stabil, dan informatif.
 \end{enumerate}
 
-\subsection{Tabel}
-Tabel ada dua jenis, yaitu tabel yang bisa termuat dalam satu halaman dan tabel yang sangat panjang sehingga tidak muat dalam satu halaman.
-\subsubsection{Tabel yang Muat dalam Satu Halaman}
-Contoh tabel dapat dilihat pada Tabel \ref{tbl:harga1} dan \ref{tbl:harga2}. Tabel dan judulnya dibuat rata kiri dan judul tabel diletakkan di atas tabel. Usahakan tabel dapat ditulis dalam satu halaman, tidak terpotong ke halaman berikutnya.
+\subsection{Ekstraksi Fitur Wajah / Representasi Wajah (\textit{Feature Extraction / Face Representation})}
+Pada tahap representasi wajah, nilai piksel dari citra wajah diubah menjadi sebuah vektor fitur yang ringkas dan diskriminatif, yang juga dikenal sebagai \textit{template}. Secara ideal, seluruh citra wajah dari subjek yang sama seharusnya dipetakan ke vektor fitur yang memiliki kemiripan satu sama lain \autocite{Trigueros2018}. Penjelasan lebih detail mengenai komponen ini akan dijelaskan pada Bagian II.3.
 
-\begin{table}[t] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
-  \begin{tabular}{ | p{2cm} | p{2cm} | p{3cm} |}
-	\hline
-	Nama 	& Satuan 		& Harga \\
-	\hline
-	Buku 	& Exemplar	& 25000 \\
-	Komputer	& Unit		& 2500000 \\
-	Pensil	& Buah		& 118900 \\
-	\hline
-	\end{tabular}
-\caption{Tabel harga bahan pokok}
-\label{tbl:harga1}
-\end{table}
+\subsection{Pencocokan Wajah (\textit{Face Matching / Classification})}
+Pada tahap \textit{face matching}, sistem membandingkan dua \textit{template} wajah untuk menghasilkan skor kemiripan yang menunjukkan seberapa besar kemungkinan kedua template tersebut berasal dari individu yang sama \autocite{Trigueros2018}. Proses ini memanfaatkan representasi fitur mendalam yang diperoleh dari arsitektur CNN modern seperti AlexNet, VGGNet, GoogleNet, ResNet, dan SENet, yang telah terbukti memberikan performa unggul dalam tugas pengenalan wajah \autocite{Albayati2024}. 
 
-\begin{table}[t] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
-	\begin{tabular}{ | l | c | r | }
-	\hline
-	Nama 	& Satuan 		& Harga \\
-	\hline
-	Buku 	& Exemplar	& 25000 \\
-	Komputer	& Unit		& 2500000 \\
-	Pensil	& Buah		& 118900 \\
-	\hline
-	\end{tabular}
-\caption{Tabel harga bahan sekunder}
-\label{tbl:harga2}
-\end{table}
+Dalam penerapannya, \textit{face matching} dapat melibatkan berbagai jenis jaringan, termasuk jaringan dengan kemampuan multitugas maupun jaringan multi-\textit{input}. Beberapa penelitian menunjukkan bahwa menggabungkan hasil dari beberapa jaringan dapat memberikan peningkatan kinerja yang signifikan dibandingkan penggunaan satu jaringan saja \autocite{Albayati2024}. Dengan demikian, proses pencocokan wajah tidak hanya bergantung pada perhitungan skor kemiripan semata, tetapi juga pada kualitas dan keragaman representasi fitur yang digunakan untuk perbandingan.
 
-\subsubsection{Tabel yang Sangat Panjang}
-Jika tabel terlalu panjang sehingga tidak muat dalam satu halaman, gunakan paket 
-\textit{longtable} untuk membuat tabel yang dapat terpotong ke halaman berikutnya, 
-seperti pada Tabel \ref{tbl:longtable1}.
 
-\begin{longtable}{@{\extracolsep{\fill}} l c r r}
-\caption{Comprehensive Data Table Example}\label{tbl:longtable1} \\
-\toprule
-\textbf{ID} & \textbf{Name} & \textbf{Score} & \textbf{Rank} \\
-\midrule
-\endfirsthead
+\section{\textit{Face Representation Methods}}
 
-\caption*{Comprehensive Data Table Example (lanjutan)} \\
-\toprule
-\textbf{ID} & \textbf{Name} & \textbf{Score} & \textbf{Rank} \\
-\midrule
-\endhead
+\textit{Face Recognition} merupakan komponen inti dalam sistem pengenalan wajah, dan efektivitasnya sangat bergantung pada kemampuan sistem dalam menghasilkan representasi wajah yang kuat dan diskriminatif. Menurut \textcite{Trigueros2018}, secara tegas menyatakan bahwa representasi wajah bisa dibilang merupakan komponen terpenting dari sistem pengenalan wajah. Hal ini menegaskan bahwa kualitas representasi menentukan keberhasilan setiap tahap dalam proses identifikasi maupun verifikasi.
 
-\midrule
-\multicolumn{4}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-\bottomrule
-\endfoot
+Pada tahap ini, citra wajah yang telah melalui proses deteksi dan penyelarasan diubah menjadi sebuah \textit{feature vector} yang ringkas dan mampu membedakan identitas satu individu dengan individu lainnya. Vektor ini berfungsi sebagai \textit{template} yang menjadi dasar proses pencocokan wajah. Tujuan utama dari representasi tersebut adalah memastikan bahwa seluruh citra wajah dari subjek yang sama, terlepas dari variasi sudut pandang, pencahayaan, atau ekspresi, dapat dipetakan ke \textit{feature vector} yang serupa. Tanpa representasi yang akurat dan konsisten, sistem tidak akan mampu melakukan identifikasi dengan baik.
 
-\bottomrule
-\endlastfoot
+Perkembangan teknologi pengenalan wajah pada dasarnya merupakan perjalanan panjang dalam mencari cara menghasilkan representasi wajah yang semakin baik. Pada metode tradisional, \textit{features} dirancang secara manual menggunakan pendekatan seperti \textit{Local Binary Patterns (LBP)} atau \textit{Gabor}, dengan tujuan membuat representasi tahan terhadap perubahan kondisi. Namun, kemunculan metode \textit{deep learning}, terutama \textit{Convolutional Neural Networks (CNN)}, menjadi terobosan besar karena jaringan ini mampu mempelajari representasi secara otomatis dari jumlah data yang sangat besar, tanpa perlu perancangan \textit{features} manual oleh peneliti.
 
-% === Table Data ===
-1 & Alice Smith & 89 & 5 \\
-2 & Bob Johnson & 93 & 3 \\
-3 & Carol Davis & 95 & 2 \\
-4 & Daniel Wilson & 88 & 6 \\
-5 & Eve Thompson & 97 & 1 \\
-6 & Frank Brown & 85 & 7 \\
-7 & Grace Lee & 91 & 4 \\
-8 & Henry Miller & 80 & 9 \\
-9 & Irene Garcia & 83 & 8 \\
-10 & Jack Robinson & 78 & 10 \\
-% Repeat with more rows to make it long
-11 & Kevin Harris & 76 & 11 \\
-12 & Laura Martin & 75 & 12 \\
-13 & Michael Clark & 74 & 13 \\
-14 & Natalie Lewis & 73 & 14 \\
-15 & Olivia Walker & 72 & 15 \\
-16 & Peter Hall & 71 & 16 \\
-17 & Quinn Allen & 70 & 17 \\
-18 & Rachel Young & 69 & 18 \\
-19 & Samuel King & 68 & 19 \\
-20 & Tina Wright & 67 & 20 \\
-21 & Uma Scott & 66 & 21 \\
-22 & Victor Green & 65 & 22 \\
-23 & Wendy Adams & 64 & 23 \\
-24 & Xavier Nelson & 63 & 24 \\
-25 & Yolanda Carter & 62 & 25 \\
-26 & Zachary Perez & 61 & 26 \\
-27 & Amelia Baker & 60 & 27 \\
-28 & Benjamin Rivera & 59 & 28 \\
-29 & Charlotte Rogers & 58 & 29 \\
-30 & David Murphy & 57 & 30 \\
-31 & Ethan Cooper & 56 & 31 \\
-32 & Fiona Reed & 55 & 32 \\
-33 & George Bailey & 54 & 33 \\
-34 & Hannah Cox & 53 & 34 \\
-35 & Isaac Howard & 52 & 35 \\
-36 & Julia Ward & 51 & 36 \\
-37 & Kyle Flores & 50 & 37 \\
-38 & Lily Bell & 49 & 38 \\
-39 & Mason Sanders & 48 & 39 \\
-40 & Nora Patterson & 47 & 40 \\
-41 & Owen Ramirez & 46 & 41 \\
-42 & Penelope Torres & 45 & 42 \\
-43 & Quentin Foster & 44 & 43 \\
-44 & Rebecca Gonzales & 43 & 44 \\
-45 & Sebastian Bryant & 42 & 45 \\
-46 & Taylor Alexander & 41 & 46 \\
-47 & Ursula Russell & 40 & 47 \\
-48 & Vincent Griffin & 39 & 48 \\
-49 & William Diaz & 38 & 49 \\
-50 & Zoe Simmons & 37 & 50 \\
-% (You can easily extend this list to hundreds of rows)
-\end{longtable}
+Walaupun tahap deteksi dan penyelarasan memainkan peran penting dalam mempersiapkan citra masukan, kualitas akhir sistem tetap sangat bergantung pada kemampuan tahap representasi dalam menghasilkan \textit{features} yang benar-benar dapat membedakan identitas individu. Bahkan tahap pencocokan wajah, yang hanya menghitung tingkat kemiripan antara dua \textit{vectors}, sepenuhnya bergantung pada kualitas representasi tersebut. Jika representasi gagal membedakan dua individu yang berbeda, maka algoritma pencocokan yang paling canggih sekalipun tidak akan mampu menghasilkan identifikasi yang benar. Dengan demikian, \textit{Face Recognition} merupakan tahap yang sangat kritis dan menjadi fondasi utama bagi keberhasilan keseluruhan sistem pengenalan wajah \autocite{Trigueros2018}.
 
-\subsubsection{Rumus}
-Contoh rumus matematika dapat ditulis seperti pada Persamaan \ref{eq:contoh1} di bawah ini. 
-Penomoran persamaan diletakkan di sebelah kanan, dan rumus ditulis dalam mode \textit{display math}.
+\subsection{Metode Berbasis Geometri (\textit{Geometry-based Methods})}
+Penelitian awal mengenai pengenalan wajah, seperti yang dilakukan pada tahun 1970-an, berfokus pada metode yang menggunakan teknik pemrosesan citra untuk mencocokkan fitur-fitur sederhana yang menggambarkan geometri wajah. \textcite{Trigueros2018} menjelaskan bahwa metode ini mendeteksi lokasi serangkaian \textit{landmark} wajah (seperti mata, hidung, dan mulut) dan mengukur posisi relatif serta jarak di antara titik-titik tersebut. Meskipun metode ini memiliki keunggulan dalam kecepatan komputasi dan penggunaan memori yang rendah, akurasi pengenalannya umumnya lebih rendah dibandingkan metode yang menggunakan informasi gradien citra \autocite{Trigueros2018}.
+
+\subsection{Metode Holistik (\textit{Holistic Methods})}
+Metode holistik merepresentasikan wajah menggunakan keseluruhan area wajah sebagai input. Pendekatan ini sering kali bekerja dengan memproyeksikan citra wajah ke dalam ruang berdimensi rendah untuk membuang detail yang tidak perlu. Salah satu pendekatan paling populer adalah \textit{Principal Component Analysis} (PCA) atau yang dikenal sebagai \textit{eigenfaces}, serta \textit{Linear Discriminant Analysis} (LDA) atau \textit{Fisherfaces} \autocite{Trigueros2018}.
+
+LDA bertujuan untuk mencari matriks proyeksi $W$ yang memaksimalkan varians antar-kelas (\textit{between-class}) sekaligus meminimalkan varians dalam-kelas (\textit{within-class}). Berdasarkan \textcite{Trigueros2018}, fungsi tujuan untuk LDA dapat dituliskan pada Persamaan \ref{eq:lda}:
+
 \begin{equation}
-E = mc^2
-\label{eq:contoh1}
+W^{*} = \arg \max_{W} \frac{|W^{T}S_{b}W|}{|W^{T}S_{w}W|}
+\label{eq:lda}
 \end{equation}
 
-Contoh lain penulisan rumus matematika yang lebih kompleks dapat ditulis seperti pada Persamaan \ref{eq:rumus2}.
+dimana $S_{b}$ adalah matriks \textit{scatter} antar-kelas dan $S_{w}$ adalah matriks \textit{scatter} dalam-kelas. Metode holistik lain yang juga dikembangkan meliputi \textit{Support Vector Machines} (SVM) dan \textit{Sparse Representation-based Classification} (SRC).
 
-\begin{align}
-f(x) &= ax^2 + bx + c \\
-f'(x) &= \frac{d}{dx}(ax^2 + bx + c) \notag \\ % tidak menampilkan nomor pada baris ini
-      &= 2ax + b \label{eq:rumus2}
-\end{align}
+\subsection{Metode Berbasis Fitur (\textit{Feature-based Methods})}
+Berbeda dengan metode holistik, metode berbasis fitur memanfaatkan fitur lokal yang diekstraksi dari berbagai lokasi pada citra wajah. Metode ini cenderung lebih tangguh (\textit{robust}) terhadap variasi lokal seperti ekspresi wajah atau pencahayaan \autocite{Trigueros2018}. Contoh populer dari metode ini termasuk \textit{Local Binary Patterns} (LBP), SIFT, dan Gabor wavelets.
 
-Jika rumus terlalu panjang untuk ditulis dalam satu baris, gunakan lingkungan \textit{multline} seperti pada Persamaan \ref{eq:rumus3} di bawah ini.
-\begin{multline} 
-y = a_0 + a_1x + a_2x^2 + a_3x^3 + a_4x^4 + a_5x^5 + a_6x^6 + a_7x^7 \\
-    + a_8x^8 + a_9x^9 + a_{10}x^{10} \label{eq:rumus3}
-\end{multline}
+Dalam penggunaan histogram deskriptor LBP, kemiripan antara dua vektor fitur $a$ dan $b$ sering kali diukur menggunakan jarak \textit{Chi-square} berbobot, sebagaimana ditunjukkan pada Persamaan \ref{eq:chisquare}:
 
-Jika ada penurunan rumus yang terdiri dari beberapa baris, namun tidak memerlukan penomoran pada setiap baris, gunakan lingkungan \textit{align*}, misalnya:
+\begin{equation}
+\chi^{2}(a,b) = \sum_{i} \frac{w_{i}(a_{i}-b_{i})^{2}}{a_{i}+b_{i}}
+\label{eq:chisquare}
+\end{equation}
 
-\begin{align*} 
-S &= \sum_{i=1}^{n} i^2 \\
-  &= 1^2 + 2^2 + 3^2 + \cdots + n^2 \\
-  &= \frac{n(n + 1)(2n + 1)}{6}
-\intertext{Contoh lainnya adalah rumus untuk mencari nilai rata-rata fungsi $f(x)$ pada interval $[p, q]$:}
-\bar{f} &= \frac{1}{q - p} \int_{p}^{q} f(x) \, dx \\
-        &= \frac{1}{q - p} \int_{p}^{q} (ax^2 + bx + c) \, dx \\
-        &= \frac{1}{q - p} \left[ \frac{a}{3}x^3 + \frac{b}{2}x^2 + cx \right]_p^q \\
-        &= \frac{a(q^3 - p^3)}{3(q - p)} + \frac{b(q^2 - p^2)}{2(q - p)} + c \label{eq:rumus4}
-\end{align*}
+dimana $w_{i}$ adalah bobot yang mengontrol kontribusi koefisien ke-$i$ dari vektor fitur \autocite{Trigueros2018}.
 
+\subsection{Metode Hibrida (\textit{Hybrid Methods})}
+Metode hibrida menggabungkan teknik dari metode holistik dan berbasis fitur untuk mendapatkan keuntungan dari kedua pendekatan tersebut. Pendekatan hibrida yang paling umum adalah mengekstraksi fitur lokal (seperti LBP atau SIFT) dan kemudian memproyeksikannya ke dalam sub-ruang berdimensi rendah yang diskriminatif menggunakan PCA atau LDA \autocite{Trigueros2018}.
 
+Sebagai contoh, \textcite{Trigueros2018} menyebutkan metode yang menggunakan representasi wajah berdimensi tinggi dengan mengekstraksi deskriptor \textit{multi-scale} LBP di sekitar \textit{landmark} wajah, yang kemudian direduksi dimensinya. Optimasi proyeksi matriks linear jarang ($B$) pada metode hibrida tertentu dapat diformulasikan sebagai masalah minimisasi berikut:
 
-\subsection{Algoritma, Pseudocode, atau Kode}
-Contoh penulisan algoritma atau pseudocode dapat ditulis seperti pada Kode \ref{alg:contoh1} di bawah ini. 
-Gunakan paket \textit{listings} untuk menulis source code dalam bahasa pemrograman tertentu, seperti pada Kode \ref{lst:contoh1}. 
+\begin{equation}
+\min_{B} ||Y - B^{T}X||_{2}^{2} + \lambda||B||_{1}
+\label{eq:hybridopt}
+\end{equation}
 
+dimana suku pertama adalah kesalahan rekonstruksi antara fitur dimensi tinggi $X$ dan fitur dimensi rendah $Y$, serta suku kedua memaksakan \textit{sparsity} pada matriks proyeksi $B$ \autocite{Trigueros2018}.
 
-% -- Example of pseudocode and source code listing --
-% -- Gunakan minipage agar listing tidak terpotong ke halaman berikutnya --
-\begin{minipage}{\textwidth} 
-\begin{lstlisting}[frame=lines, captionpos=t, caption={Contoh pseudocode}, label={alg:contoh1}]
-ALGORITHM HelloWorld
-   PRINT "Hello, World!"
-END ALGORITHM
-\end{lstlisting}
-\end{minipage}
+\subsection{Metode Deep Learning (\textit{Deep Learning Methods})}
+Metode \textit{Deep Learning}, khususnya \textit{Convolutional Neural Networks} (CNN), telah menjadi standar terkini dalam pengenalan wajah karena kemampuannya untuk belajar fitur yang tangguh dari data pelatihan berskala besar \autocite{Trigueros2018}. Salah satu aspek kunci dalam pelatihan CNN adalah fungsi \textit{loss}.
 
-\begin{minipage}{\textwidth}
-\begin{lstlisting}[language=Python, frame=single, caption={Contoh source code Python}, captionpos=t, label={lst:contoh1}]
-def hello_world():
-    print("Hello, World!")       
-hello_world()
-\end{lstlisting}
-\end{minipage}
+Selain \textit{Softmax loss} standar, \textit{Triplet Loss} digunakan untuk memisahkan jarak antara pasangan positif dan negatif dengan margin tertentu. Kondisi yang harus dipenuhi untuk setiap \textit{triplet} dijelaskan pada Persamaan \ref{eq:triplet}:
 
+\begin{equation}
+||f(x_{a})-f(x_{p})||_{2}^{2} + \alpha < ||f(x_{a})-f(x_{n})||_{2}^{2}
+\label{eq:triplet}
+\end{equation}
 
-\section{Beberapa Kesalahan Penulisan yang Sering Terjadi}
-\subsection{Penggunaan Kata "di mana" atau "dimana"}
-Banyak yang menuliskan kata "di mana" atau "dimana" sebagai pengganti kata "which" dalam bahasa Inggris. 
-Padahal, penggunaan kata "di mana" atau "dimana" tidak tepat dalam konteks tersebut. Demikian juga untuk kata serupa, misalnya "yang mana".
-Kata "di mana" atau "dimana" ini harus diganti dengan kata lain, seperti "dengan", "tempat", "yang", dan sebagainya tergantung kalimatnya.
-Penjelasan lengkap dapat dilihat pada \autocite{BPBI}.
+dimana $x_{a}$ adalah citra \textit{anchor}, $x_{p}$ adalah citra dari subjek yang sama (\textit{positive}), $x_{n}$ adalah citra dari subjek berbeda (\textit{negative}), dan $\alpha$ adalah margin \autocite{Trigueros2018}. Perkembangan terbaru juga memperkenalkan margin aditif atau multiplikatif ke dalam fungsi \textit{softmax} untuk meningkatkan kemampuan diskriminatif model.
 
-\subsection{Penggunaan Kata "sedangkan" dan "sehingga"}
+\section{\textit{One-Shot Learning}}
+\textit{One-Shot Learning} (OSL) adalah sebuah pendekatan yang meniru kemampuan unik manusia untuk mengenali wajah hanya dengan satu kali lihat. Dalam banyak skenario dunia nyata, pengumpulan dataset gambar wajah berskala besar sering kali sulit dilakukan. Pada umumnya, tugas identifikasi hanya memiliki satu atau sedikit sampel per individu. Metode \textit{deep learning} konvensional seperti \textit{Convolutional Neural Network} (CNN) biasanya memerlukan data pelatihan dalam jumlah besar dan cenderung berkinerja buruk jika dilatih dengan input yang sangat terbatas \autocite{Albayati2024}.
 
-\begin{table}[t]
-  \begin{tabular}{|c|l|l|}
-  \hline
-  Kata & Salah & Benar \\ \hline
-  sedangkan & \begin{tabular}[c]{@{}c@{}}Sedangkan sistem lama masih\\ digunakan oleh banyak pengguna.\end{tabular} & \begin{tabular}[c]{@{}c@{}}Sistem lama masih digunakan\\ oleh banyak pengguna,\\ sedangkan sistem baru belum siap.\end{tabular} \\ \hline
-  sehingga & \begin{tabular}[c]{@{}c@{}}Sehingga sistem lama masih\\ digunakan oleh banyak pengguna.\end{tabular} & \begin{tabular}[c]{@{}c@{}}Sistem lama masih digunakan\\ oleh banyak pengguna sehingga\\ sistem baru belum siap.\end{tabular} \\ \hline
-  \end{tabular}
-  \caption{Contoh penggunaan kata "sedangkan" dan "sehingga"}
-  \label{tbl:sedangkan_sehingga}
-\end{table}
+Algoritma OSL dirancang untuk mengatasi masalah kelangkaan data tersebut. Dalam konteks pengenalan wajah, OSL bertujuan untuk mengembangkan sistem yang mampu belajar dan mengenali individu hanya dari satu gambar (atau satu sampel) per kelas.
 
-Kata "sedangkan" dan "sehingga" adalah kata hubung atau konjungsi. 
-Konjungsi adalah kata atau ungkapan yang menghubungkan satuan bahasa 
-(kata, frasa, klausa, dan kalimat). 
-Konjungsi dapat dibagi menjadi konjungsi intrakalimat dan antarkalimat.  
-Kata "sedangkan" menghubungkan dua klausa yang bersifat kontrasif, 
-sedangkan "sehingga" menghubungkan dua klausa yang bersifat kausal. 
-Dalam ragam formal, kata hubung “sedangkan” dan “sehingga” hanya dapat digunakan 
-sebagai konjungsi intrakalimat sehingga kedua konjungsi itu \textbf{tidak dapat diletakkan pada awal kalimat}.
-Selain itu, penggunaan kata "sedangkan" harus didahului oleh koma (,), sedangkan kata "sehingga" tidak perlu didahului oleh koma (,).
-Contoh penggunaan yang benar dan salah dapat dilihat pada Tabel \ref{tbl:sedangkan_sehingga}.
-
-
-\subsection{Penggunaan Istilah yang Tidak Baku}
-Ada beberapa istilah yang sering digunakan dalam pembicaraan sehari-hari, tetapi tidak baku dalam penulisan ilmiah.
-Beberapa istilah tersebut antara lain:
-\begin{enumerate}
-  \item analisa $\rightarrow$ analisis
-  \item eksisting atau existing $\rightarrow$ yang ada atau saat ini
-  \item bisnis proses $\rightarrow$ proses bisnis
-  \item user $\rightarrow$ pengguna
-  \item system $\rightarrow$ sistem
-  \item database $\rightarrow$ basis data
-  \item aktifitas $\rightarrow$ aktivitas
-  \item efektifitas $\rightarrow$ efektivitas
-  \item sosial media $\rightarrow$ media sosial
-\end{enumerate}
-
-\subsection{Pemisah Desimal dan Ribuan}
-Tanda pemisah desimal dalam bahasa Indonesia adalah tanda koma, contoh:
-\begin{enumerate}
-  \item (Salah) Akurasi naik menjadi 50.6\% 
-  \item (Benar) Akurasi naik menjadi 50,6\% 
-\end{enumerate}
-
-\subsection{Daftar atau \textit{List}}
-Ada beberapa aturan penulisan daftar atau \textit{list} yang perlu diperhatikan, antara lain:
-\begin{enumerate}[a)]
-\item Jika memungkinkan, hindari penggunaan “bullet points” atau sejenisnya. Sebaiknya, gunakan angka (1, 2, 3, ...) atau huruf (a, b, c, …). Dengan demikian, pembaca dapat dengan mudah melihat jumlah \textit{item} atau \textit{list}. 
-\item Jika dalam daftar hanya ada satu item, tidak perlu menggunakan nomor urut.
-\item Penjelasan atau deskripsi suatu item sebaiknya menyatu dengan judul item tersebut, tidak berbeda halaman. Contoh yang salah: judul item ada di halaman 10, namun deskripsinya di halaman 11. Sebaiknya pindahkan judul tersebut ke halaman 11.
-\item Jika penjelasan atau deskripsi suatu item cukup panjang, misalnya lebih dari 1 halaman atau terdiri atas beberapa paragraf, sebaiknya setiap item tersebut dijadikan judul subbab, kecuali jika level subbab sudah mencapai level 4. 
-\end{enumerate}
-
-\subsection{Penggunaan Kata "masing-masing" dan "setiap"}
-Kata “masing-masing” digunakan di belakang kata yang diterangkan, misalnya 
-"Setiap proses menggunakan algoritma masing-masing". Kata “tiap-tiap” atau “setiap”
-ditempatkan di depan kata yang diterangkan, misalnya
-"Setiap proses menggunakan algoritma tertentu".
+Salah satu teknik yang umum digunakan untuk mencapai hal ini adalah \textit{Siamese Network}. Alih-alih melakukan klasifikasi gambar secara langsung, \textit{Siamese Network} dilatih untuk mempelajari fungsi kesamaan (\textit{similarity function}). Jaringan ini menerima dua gambar sebagai masukan dan menghasilkan skor yang menunjukkan seberapa mirip kedua gambar tersebut, apakah berasal dari orang yang sama atau tidak \autocite{Albayati2024}.

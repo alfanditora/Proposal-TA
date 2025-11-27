@@ -5,34 +5,70 @@
 \label{chap:pendahuluan}
 % --- Latar Belakang ---
 \section{Latar Belakang}
-Latar Belakang menjelaskan dasar pemikiran, motivasi, kebutuhan, alasan, atau urgensi pemilihan masalah tugas akhir. Subbab ini berisi penjelasan ringkas tentang kondisi atau situasi yang ada saat ini terkait dengan topik yang dibahas. Tujuan utamanya adalah untuk memberikan informasi secukupnya kepada pembaca agar memahami topik yang akan dibahas. Dalam subbab ini, jelaskan hal-hal berikut ini:
-\begin{enumerate}
-\item	Kondisi atau situasi topik yang dibahas beserta permasalahannya, misalnya tentang pengelolaan informasi di puskesmas daerah pedesaan dan masalah yang dihadapi.
-\item	Berbagai solusi yang telah diterapkan atau solusi yang tersedia dan memungkinkan untuk diterapkan untuk menyelesaikan masalah tersebut.
-\end{enumerate}
+Perkembangan teknologi digital dan penggunaan media penyimpanan berbasis cloud telah menyebabkan peningkatan jumlah data visual, khususnya foto digital. Pasar fotografi digital global diproyeksikan tumbuh dari \$53.14 miliar pada tahun 2024 menjadi \$70.95 miliar pada tahun 2029, didorong oleh lonjakan pengguna ponsel pintar \autocite{TheBusinessResearchCompany2025}. Sejalan dengan itu, pasar penyimpanan cloud global menunjukkan pertumbuhan yang lebih pesat, diperkirakan akan berkembang dari \$161.28 miliar pada tahun 2025 menjadi \$639.40 miliar pada tahun 2032 \autocite{FortuneBusinessInsights2025}. Perkembangan ini membuat pengguna sering memiliki banyak foto yang tersimpan di perangkat pribadi atau layanan seperti Google Drive, OneDrive, dan sebagainya. Hal ini menciptakan permasalahan baru dalam ranah Manajemen Informasi Pribadi (\textit{Personal Information Management}), di mana tantangannya bukan lagi soal keterbatasan ruang, melainkan kesulitan dalam penemuan kembali informasi (\textit{information retrieval}).
+
+Proses pencarian foto secara manual memakan waktu yang lama karena pengguna harus membuka dan memeriksa setiap foto satu per satu. Praktik ini terbukti tidak efisien dan membebani secara kognitif, sehingga menimbulkan kebutuhan akan sebuah sistem yang dapat secara otomatis mengenali dan mengelompokkan foto berdasarkan identitas wajah pengguna.  
+
+Dengan kemajuan teknologi \textit{Computer Vision} dan \textit{Machine Learning}, khususnya pada bidang Pengenalan Wajah (\textit{Face Recognition}), memungkinkan untuk mengembangkan sistem yang mampu mendeteksi dan mengidentifikasi wajah seseorang secara otomatis. Pengenalan wajah itu sendiri didefinisikan sebagai metode biometrik untuk mengidentifikasi atau memverifikasi seseorang dengan membandingkan pola fitur wajah mereka. Dalam implementasinya, pengguna cukup mengambil sebuah foto \textit{selfie}, dan sistem akan secara otomatis melakukan pencarian terhadap seluruh foto yang mengandung wajah pengguna di dalam folder atau drive tertentu. Pendekatan ini merupakan aplikasi praktis dari paradigma \textit{one-shot learning}, di mana sistem mampu membuat prediksi yang benar meskipun hanya diberikan satu contoh dari kelas baru, dalam hal ini berarti wajah pengguna \autocite{Albayati2024}
+
+Dalam penelitian ini, dilakukan eksplorasi terhadap berbagai algoritma pengenalan wajah. Meskipun algoritma modern menunjukkan akurasi yang sangat tinggi di lingkungan terkontrol, kinerjanya dapat menurun saat dihadapkan pada skenario aslinya. Eksplorasi ini bertujuan untuk menemukan metode yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pada kondisi foto yang bervariasi, misalnya perbedaan pencahayaan, pose, ekspresi wajah, dan resolusi gambar.
+
+Diharapkan sistem ini dapat memberikan solusi yang efisien dalam proses pencarian foto pribadi, sekaligus memberikan kontribusi pada pengembangan sistem pengenalan wajah yang adaptif dan mudah diterapkan untuk kebutuhan personal maupun organisasi.
 
 % --- Rumusan Masalah ---
 \section{Rumusan Masalah}
-Rumusan Masalah berisi masalah utama yang dibahas dalam tugas akhir. Rumusan masalah yang baik memiliki struktur sebagai berikut:
+Berdasarkan latar belakang masalah yang telah disusun, maka rumusan masalah yang menjadi fokus pembahasan dalam penyusunan tugas akhir ini adalah sebagai berikut:
 \begin{enumerate}
-\item	Pokok persoalan dari kondisi atau situasi yang ada saat ini. Dengan kata lain, jelaskan kelemahan atau kekurangan dari kondisi, situasi, atau solusi yang dijelaskan pada latar belakang. Ini merupakan pokok rumusan masalah.
-\item	Elaborasi lebih lanjut urgensi penyelesaian masalah tersebut (mengapa penting untuk diselesaikan dan akibat yang dapat terjadi jika tidak diselesaikan).
-\item	Usulan singkat terkait dengan solusi yang ditawarkan untuk menyelesaikan persoalan.
-Penting untuk diperhatikan bahwa persoalan yang dideskripsikan pada subbab ini akan dipertanggungjawabkan di bab Evaluasi (apakah terselesaikan atau tidak).
+\item Bagaimana merancang dan mengimplementasikan sistem pencarian otomatis foto pribadi berbasis pengenalan wajah dengan memanfaatkan satu foto selfie sebagai acuan pencarian (\textit{query})?
+\item Algoritma pengenalan wajah apa yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pengguna pada kondisi foto yang bervariasi, sehingga mampu memberikan hasil pencarian terbaik dalam konteks foto pribadi?
 \end{enumerate}
 
 % --- Tujuan ---
 \section{Tujuan}
-Tuliskan tujuan utama dan/atau tujuan detail yang akan dicapai dalam pelaksanaan tugas akhir. Fokuskan pada hasil akhir yang ingin diperoleh setelah tugas akhir diselesaikan, terkait dengan penyelesaian persoalan pada rumusan masalah. Penting untuk diperhatikan bahwa tujuan yang dideskripsikan pada subbab ini akan dipertanggungjawabkan di akhir pelaksanaan tugas akhir apakah tercapai atau tidak. Tuliskan kriteria keberhasilan tugas akhir ini.
+Berdasarkan rumusan masalah yang telah disusun, maka tujuan dari penyusunan tugas akhir ini adalah sebagai berikut:
+\begin{enumerate}
+\item Merancang dan melakukan implementasi sistem pencarian otomatis foto pribadi dari folder yang disimpan di perangkat pribadi maupun layanan \textit{cloud}, berbasis \textit{face recognition}, dengan melakukan proses identifikasi dan penyortiran foto secara efisien menggunakan satu foto \textit{selfie} sebagai data acuan (\textit{query}).
+\item Mengeksplorasi dan menentukan algoritma \textit{face recognition} yang paling efektif dan akurat untuk digunakan dalam mendeteksi serta mengenali wajah pengguna pada berbagai kondisi foto, seperti perbedaan pencahayaan, pose, ekspresi, dan resolusi gambar, guna memperoleh hasil pencarian terbaik.
+\end{enumerate}
 
 % --- Batasan Masalah ---
 \section{Batasan Masalah}
-Tuliskan batasan-batasan yang diambil dalam pelaksanaan tugas akhir. Batasan ini dapat dihindari (bersifat opsional, tidak perlu ada) jika topik atau judul tugas akhir dibuat cukup spesifik.
+Agar pembahasan dalam tugas akhir ini terarah dan sesuai dengan ruang lingkup penelitian, maka batasan-batasan yang digunakan adalah sebagai berikut:
+\begin{enumerate}
+    \item Sistem difokuskan untuk mengenali dan mencari foto yang menampilkan wajah pengguna berdasarkan satu foto \textit{selfie} sebagai acuan (\textit{query}). Sistem tidak dirancang untuk mengenali banyak individu secara bersamaan atau melakukan klasifikasi \textit{multi-person}.
+    
+    \item Kualitas foto yang digunakan dalam penelitian diasumsikan memadai agar wajah dapat terdeteksi dengan jelas. Sistem tidak dioptimalkan untuk menangani foto dengan resolusi sangat rendah, pencahayaan ekstrem, wajah buram, atau wajah yang tertutup secara signifikan.
+    
+    % \item Eksplorasi dan implementasi algoritma dalam penelitian ini dibatasi pada beberapa metode yang mewakili pendekatan klasik dan modern dalam \textit{face recognition}, yaitu:
+    % \begin{enumerate}[a.]
+    %     \item \textit{Haar Cascade Classifier}, digunakan untuk proses deteksi wajah awal.
+    %     \item \textit{Histogram of Oriented Gradients (HOG)}, metode berbasis fitur klasik untuk deteksi dan representasi wajah.
+    %     \item \textit{Convolutional Neural Network (CNN)}, digunakan untuk ekstraksi fitur wajah secara mendalam (\textit{deep feature extraction}).
+    %     \item \textit{FaceNet}, \textit{DeepFace}, dan \textit{OpenFace}, digunakan untuk proses pencocokan (\textit{face matching}) dan identifikasi wajah berdasarkan \textit{embedding} yang dihasilkan.
+    % \end{enumerate}
+\end{enumerate}
 
 % --- Metodologi Pengerjaan TA ---
 \section{Metodologi}
-Tuliskan semua tahapan yang akan dilalui selama pelaksanaan tugas akhir. Tahapan ini spesifik untuk menyelesaikan persoalan tugas akhir. Khusus untuk penyusunan proposal ini, jelaskan secara detail:
+Penelitian ini menggunakan pendekatan kuantitatif dengan metode eksperimental dan rekayasa sistem. Pendekatan kuantitatif dipilih karena penelitian berfokus pada pengukuran performa sistem secara objektif dan numerik, meliputi tingkat akurasi pengenalan wajah, waktu pemrosesan, serta akurasi algoritma terhadap variasi kondisi foto.
+
+Metode eksperimental digunakan untuk menguji beberapa algoritma pengenalan wajah dengan tujuan menentukan algoritma yang paling efektif dalam konteks pencarian foto pribadi berbasis \textit{face recognition}.
+
+Rekayasa sistem dilakukan dengan menggunakan metodologi \textit{Software Development Life Cycle} (SDLC) model \textit{waterfall}. Metode ini dipilih karena memberikan struktur pengembangan yang sistematis, mulai dari analisis kebutuhan hingga evaluasi hasil implementasi. Secara umum, tahapan rekayasa sistem meliputi:
+
 \begin{enumerate}
-\item	Tahapan investigasi pengumpulan fakta di latar belakang untuk merumuskan masalah.
-\item	Langkah-langkah pencarian, pengelompokan, dan penapisan literatur atau sumber informasi untuk mengumpulkan informasi yang relevan tentang topik yang diangkat, termasuk teori (konsep atau teori apa saja yang perlu dicari), hal-hal yang telah dicapai oleh orang lain (cara mencari dan kata kuncinya), dan berbagai informasi pendukung, untuk mencari solusi terhadap masalah yang dibahas. Gunakan metodologi yang tepat dalam menggali informasi dan dokumentasikan prosesnya (termasuk rekaman wawancara atau survei) di dalam Lampiran, termasuk tautan ke video atau foto. Hasil penggalian informasi ini akan dijelaskan secara sistematis di Bab II Studi Literatur.
+    \item Analisis Kebutuhan \\
+    Pada tahap ini dilakukan identifikasi terhadap permasalahan utama pengguna. Selanjutnya, dilakukan penyusunan kebutuhan fungsional dan nonfungsional dari sistem yang akan dibangun.
+    
+    \item Desain Sistem \\
+    Tahap ini mencakup perancangan arsitektur dan alur kerja sistem. Selain itu, menentukan teknologi yang digunakan dalam implementasi sistem.
+    
+    \item Implementasi \\
+    Tahap ini mencakup pengembangan sistem secara penuh menggunakan teknologi dan arsitektur yang telah ditentukan sebelumnya.
+    
+    \item Pengujian dan Evaluasi \\
+    Tahap ini bertujuan untuk mengukur dan membandingkan performa sistem berdasarkan metrik yang telah ditentukan. Evaluasi dilakukan agar sistem dapat memberikan hasil terbaik dalam melakukan operasi.
+    
+    \item Dokumentasi dan Analisis Hasil \\
+    Tahap ini mencakup dokumentasi hasil penelitian, pembahasan hasil evaluasi, serta analisis kesesuaian antara tujuan penelitian dan hasil yang diperoleh. Dari hasil analisis, diharapkan kesimpulan yang ditarik dapat menjawab permasalahan utama penelitian ini.
 \end{enumerate}
