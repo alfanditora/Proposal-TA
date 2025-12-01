@@ -3,16 +3,64 @@
 % ==========================================
 \chapter{DESAIN KONSEP SOLUSI}
 \label{chap:desain-konsep-solusi}
-Ilustrasikan desain konsep solusi dalam bentuk model konseptual dan penjelasan secara ringkas, 
-beserta perbedaannya dengan sistem saat ini. Ilustrasi harus dapat dibandingkan (\textit{before} and \textit{after}). 
-Karena masih berupa proposal, bab ini hanya berisi gambar desain konsep solusi tersebut dan 
-penjelasan perbandingannya dengan gambar sistem yang ada saat ini (yang tergambar di awal Bab \ref{chap:analisis-masalah}).
+% Ilustrasikan desain konsep solusi dalam bentuk model konseptual dan penjelasan secara ringkas, 
+% beserta perbedaannya dengan sistem saat ini. Ilustrasi harus dapat dibandingkan (\textit{before} and \textit{after}). 
+% Karena masih berupa proposal, bab ini hanya berisi gambar desain konsep solusi tersebut dan 
+% penjelasan perbandingannya dengan gambar sistem yang ada saat ini (yang tergambar di awal Bab \ref{chap:analisis-masalah}).
 
 
 \section{Diagram Konseptual Sistem}
+Dari solusi yang telah dipilih pada bagian sebelumnya, bagian ini akan menjelaskan mengenai perbandingan alur pencarian foto pribadi sebelum dan sesudah pengembangan sistem pencarian foto pribadi berdasarkan \textit{selfie}.
 
-\subsection{Sistem Sebelum (As-Is)}
+\subsection{Sistem Sebelum (\textit{As-Is})}
+Alur pencarian foto yang konvensional saat ini ditunjukkan pada Gambar \ref{gambar:Alur Sistem As-Is}. Alur dimulai dengan mengakses penyimpanan yang dapat berupa folder/\textit{drive}. Selanjutnya untuk masing-masing \textit{file} foto, akan dicek satu-satu untuk melihat apakah foto yang sedang dibuka tersebut adalah foto pribadi atau bukan. Ketika foto yang dibuka merupakan foto pribadi, foto tersebut akan dipisahkan atau ditandai untuk disimpan pada ruang pernyimpanan yang terpisah. Apabila foto bukan foto pribadi, akan dilanjutkan dengan membuka \textit{file} foto selanjutnya hingga semua foto sudah dicek.
 
-\subsection{Sistem Sesudah (To-Be)}
+\begin{figure}[h] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
+    \centering
+    \captionsetup{justification=centering}
+    	\includegraphics[width=0.7\textwidth]{image/B4-As Is.png}
+    \caption{Alur Sistem \textit{As-Is}}
+    \label{gambar:Alur Sistem As-Is}
+\end{figure}
+
+Berdasarkan alur pencarian tersebut, sistem saat ini memiliki dua keterbatasan. Pertama, waktu yang diperlukan untuk melakukan cek untuk setiap foto dapat menjadi terlalu lama untuk jumlah foto yang banyak. Terakhir, rawan terjadi kesalahan ketika melakukan cek karena foto yang terlalu banyak dapat membingungkan, sehingga dapat mengakibatkan \textit{miss}.
+
+\subsection{Sistem Sesudah (\textit{To-Be})}
+
+Sistem pencarian foto pribadi yang diusulkan ditunjukkan pada Gambar \ref{gambar:Alur Sistem To-Be}. Sistem ini mengembangkan algoritma \textit{face recognition} dengan menggunakan \textit{one-shot learning}. Dengan adanya sistem ini, alur iterasi yang tidak perlu dilakukan oleh pengguna akan dilakukan secara otomatis oleh sistem.
+
+\begin{figure}[h] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
+    \centering
+    \captionsetup{justification=centering}
+    	\includegraphics[width=0.7\textwidth]{image/B4-To Be.png}
+    \caption{Alur Sistem \textit{To-Be}}
+    \label{gambar:Alur Sistem To-Be}
+\end{figure}
+
+Alur dimulai dengan memasukkan folder foto dengan mengunggah menggunakan \textit{file .zip} atau dengan tautan untuk \textit{drive}. Kemudian, pengguna melakukan foto \textit{selfie} untuk diunggah kedalam sistem. Dari masukan tersebut, sistem kemudian akan memproses pencarian foto pribadi berdasarkan dengan wajah yang ada di dalam foto \textit{selfie}. Terakhir, keluaran dari sistem adalah folder foto pribadi yang berhasil disaring dari masukan awal.
 
 \subsection{Perbandingan Sistem As-Is dan To-Be}
+
+\section{Penjelasan Desain Solusi Sistem}
+
+\section{Algoritma \textit{Face Recognition}}
+
+Berdasarkan hasil solusi, fokus ekspolrasi selanjutnya berada pada penentuan algoritma \textit{face recognition} yang paling akurat.  Bagian ini akan menjelaskan bagian eksplorasi yang akan dibandingkan dari algoritma \textit{face recognition} yang ada.
+
+\subsection{Eksplorasi Algoritma Solusi}
+Seperti yang telah diketahui dari Bagian II.2, \textit{face recognition} terbagi menjadi empat blok komponenen, \textit{face detection}, \textit{preprocessing and alignment}, \textit{face representation}, dan \textit{face matching}. Berdasarkan bagian II.3, dapat didebatkan bahwa komponenen inti dari sistem \textit{face recognition} adalah \textit{face representation}. Komponen tersebut menentukan keberhasilan setiap tahap dalam proses identifikasi maupun verfikasi. Berarti, komponen tersebut memainkan peran penting yang nantinya akan terpengaruh ke tingkat akurasi dan waktu kompleksitas dari algoritma \textit{face recognition}.
+
+Eksplorasi yang dilakukan dalam algoritma \textit{face recognition} akan dilakukan pada komponen \textit{face representation}. Dalam eksplorasi, akan dilakukan perbandingan baik dari metode tradisional hingga metode yang paling modern. Tujuan eksplorasi ini adalah untuk menemukan metode yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pada kondisi foto yang bervariasi, sesuai dengan Rumusan Masalah kedua.
+
+Berdasarkan studi literatur pada Bagian II.3, terdapat lima kategori utama metode yang akan dieksplorasi dan dibandingkan kinerjanya dalam konteks \textit{one-shot learning} (OSL) untuk pencarian foto pribadi:
+
+\begin{enumerate}
+  \item Metode Berbasis Geometri (\textit{Geometry-based Methods})
+  \item Metode Holistik (\textit{Holistic Methods})
+  \item Metode Berbasis Fitur (\textit{Feature-based Methods})
+  \item Metode Hibrida (\textit{Hybrid Methods})
+  \item Metode Deep Learning (\textit{Deep Learning Methods})
+\end{enumerate}
+
+\subsection{Parameter Perbandingan}
+

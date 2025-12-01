@@ -7,6 +7,7 @@
 \chapter{ANALISIS MASALAH}
 \label{chap:analisis-masalah}
 \section{Analisis Kondisi Saat Ini}
+Bagian ini akan menjelaskan hasil analisis dari kondisi saat ini terkait dengan pencarian foto pribadi. Foto pribadi yang dimaksud pada tugas akhir merupakan foto yang mengandung wajah dari pemilik foto tersebut.
 
 \subsection{Analisis Proses Bisnis Pencarian Foto Pribadi}
 Pada kondisi saat ini, pengguna digital sering kali memiliki kumpulan foto yang disimpan dalam ruang penyimpanan lokal ataupun \textit{cloud}. Dengan meningkatnya jumlah foto yang disimpan dalam ruang penyimpanan tersebut, semakin sulit bagi pengguna untuk mengelolanya, apalagi jika ruang penyimpanan menyimpan selain foto pengguna. Ketika pengguna ingin mencari foto pribadi (Foto yang mengandung wajah diri pengguna) dari ruang penyimpanan tersebut, pengguna akan kesulitan untuk menyaring antara foto pribadi dengan foto lainnya. Oleh karena itu, diperlukan analisis mendalam untuk mengetahui perilaku pengguna dalam menyaring foto tersebut.
@@ -14,7 +15,7 @@ Pada kondisi saat ini, pengguna digital sering kali memiliki kumpulan foto yang 
 \begin{figure}[h] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
 	\centering
   \captionsetup{justification=centering}
-    	\includegraphics[width=0.7\textwidth]{image/PB-Pencarian Foto.png}
+    	\includegraphics[width=0.7\textwidth]{image/B3-Kondisi Saat Ini.png}
 	\caption{Alur Pencarian Foto dari Ruang Renyimpanan}
 	\label{gambar:pencarian foto}
 \end{figure}
@@ -81,26 +82,8 @@ Berdasarkan peluang teknologi yang dijelaskan pada bagian sebelumnya, teknologi 
 
 Selain itu, sistem ini dapat mengimplementasikan konsep \textit{One-Shot Learning} yang dijelaskan pada Bagian II.4. Dalam OSL, sistem harus dapat membuat prediksi yang benar meskipun hanya diberikan satu contoh dari kelas baru. Penggunaan satu foto \textit{selfie} sebagai data acuan \textit{query} untuk membandingkan dengan seluruh kumpulan foto adalah aplikasi langsung dari paradigma OSL. Algoritma \textit{face recognition} modern, seperti yang menggunakan \textit{Sieamese Network} atau \textit{Triplet Loss} memang dirancang untuk mempelajar fungsi kesamaan ini.
 
-Dua peluang teknologi lain yang sempat dipertimbangkan tidak mampu memenuhi kebutuhan yang telah didefinisikan sebelumnya. Pada CBIR, pendekatan ini hanya mengukur kesamaan berdasarkan karakteristik visual tingkat rendah seperti warna, tekstur, atau bentuk secara umum. CBIR tidak dapat mengukur kesamaan identitas wajah yang spesifik, sehingga gagal memisahkan foto pengguna dengan foto orang lain yang mungkin memiliki latar belakang atau pencahayaan yang mirip. Sedangkan, pendekatan berbasis atribut atau objek semantik, hanya berfokus pada penyaringan berdasarkan konteks atau objek dalam foto (misalnya, mencari foto di pantai, atau foto yang memakai kacamata). Meskipun dapat mempersempit hasil, metode ini tidak mampu memverifikasi identitas pengguna secara biometrik.
-
-Analisis antara peluang teknologi dapat dilihat dengan rangkum dan terstruktur di Tabel \ref{tbl:alternatif_solusi}
+Dua peluang teknologi lain yang sempat dipertimbangkan tidak mampu memenuhi kebutuhan yang telah didefinisikan sebelumnya. Pada CBIR, pendekatan ini hanya mengukur kesamaan berdasarkan karakteristik visual tingkat rendah seperti warna, tekstur, atau bentuk secara umum. CBIR tidak dapat mengukur kesamaan identitas wajah yang spesifik, sehingga gagal memisahkan foto pengguna dengan foto orang lain yang mungkin memiliki latar belakang atau pencahayaan yang mirip. Sedangkan, pendekatan berbasis atribut atau objek semantik, hanya berfokus pada penyaringan berdasarkan konteks atau objek dalam foto (misalnya, mencari foto di pantai, atau foto yang memakai kacamata). Meskipun dapat mempersempit hasil, metode ini tidak mampu memverifikasi identitas pengguna secara biometrik. Analisis antara peluang teknologi dapat dilihat dengan rangkum dan terstruktur di Tabel \ref{tbl:alternatif_solusi}
 
 \input{table/alternatif.tex}
 
 Berdasarkan hasil analisis, pendekatan berbasis \textit{face recognition} adalah solusi yang paling relevan dan efektif karena kelebihan utamanya terletak pada kemampuan untuk melakukan identifikasi spesifik individu. Meskipun memerlukan komputasi yang lebih tinggi, metode ini secara langsung menjawab tujuan sistem untuk menyaring dan mengelompokkan foto berdasarkan identitas wajah pengguna. Oleh karena itu, eksplorasi selanjutnya akan difokuskan pada penentuan algoritma \textit{face recognition} yang paling akurat untuk mengatasi variasi kondisi foto.
-
-
-\subsection{Eksplorasi Algoritma Solusi}
-Seperti yang telah diketahui dari Bagian II.2, \textit{face recognition} terbagi menjadi empat blok komponenen, \textit{face detection}, \textit{preprocessing and alignment}, \textit{face representation}, dan \textit{face matching}. Berdasarkan bagian II.3, dapat didebatkan bahwa komponenen inti dari sistem \textit{face recognition} adalah \textit{face representation}. Komponen tersebut menentukan keberhasilan setiap tahap dalam proses identifikasi maupun verfikasi. Berarti, komponen tersebut memainkan peran penting yang nantinya akan terpengaruh ke tingkat akurasi dan waktu kompleksitas dari algoritma \textit{face recognition}.
-
-Eksplorasi yang dilakukan dalam algoritma \textit{face recognition} akan dilakukan pada komponen \textit{face representation}. Dalam eksplorasi, akan dilakukan perbandingan baik dari metode tradisional hingga metode yang paling modern. Tujuan eksplorasi ini adalah untuk menemukan metode yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pada kondisi foto yang bervariasi, sesuai dengan Rumusan Masalah kedua.
-
-Berdasarkan studi literatur pada Bagian II.3, terdapat lima kategori utama metode yang akan dieksplorasi dan dibandingkan kinerjanya dalam konteks \textit{one-shot learning} (OSL) untuk pencarian foto pribadi:
-
-\begin{enumerate}
-  \item Metode Berbasis Geometri (\textit{Geometry-based Methods})
-  \item Metode Holistik (\textit{Holistic Methods})
-  \item Metode Berbasis Fitur (\textit{Feature-based Methods})
-  \item Metode Hibrida (\textit{Hybrid Methods})
-  \item Metode Deep Learning (\textit{Deep Learning Methods})
-\end{enumerate}
