@@ -1,0 +1,23 @@
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | p{1cm} | p{12cm} | }
+    \hline
+    \textbf{No} & \textbf{Indikator Keberhasilan} \\ \hline
+
+    1 & \textbf{Akurasi Minimal 85\%}: 
+    Hasil perhitungan True Positive dan True Negative harus menghasilkan skor akurasi di atas 85\%. 
+    Angka ini menjadi batas toleransi agar sistem layak digunakan menggantikan pencarian manual. \\ \hline
+
+    2 & \textbf{Waktu Komputasi < 1 Detik/Foto}:
+    Sistem harus mampu melakukan deteksi, ekstraksi fitur, dan pencocokan dengan kecepatan rata-rata di bawah 1 detik per foto pada dataset pengujian. \\ \hline
+
+    3 & \textbf{Skalabilitas Kapasitas}:
+    Sistem mampu memproses dataset sebanyak 1.000 foto dalam satu kali eksekusi (\textit{batch processing}) tanpa mengalami kehabisan memori (Out of Memory). \\ \hline
+
+    4 & \textbf{Stabilitas Tanpa Crash}:
+    Sistem harus memiliki tingkat keberhasilan eksekusi 100\% (tidak \textit{force close}) meskipun terdapat file tidak valid atau foto tanpa wajah dalam dataset input. \\ \hline
+
+  \end{tabular}
+\caption{Indikator Keberhasilan}
+\label{tbl:indikator keberhasilan}
+\end{table}

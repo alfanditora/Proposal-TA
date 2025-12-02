@@ -30,8 +30,28 @@ Bagian ini akan menjelaskan mengenai rencana pengujian sistem yang akan dikemban
 
 \subsection{Metode Pengujian}
 
+Metode pengujian yang digunakan untuk menguji sistem yang dikembangkan memiliki dua tujuan, yaitu menguji fungsionalitas dan menguji performa. Berikut empat pengujian yang akan dilakukan pada tugas sistem yang dikembangkan di tugas akhir ini:
+
+\begin{enumerate}
+    \item Pengujian Fungsional \\
+    Pengujian ini dilakukan untuk memastika sistem dapat menerima \textit{input} folder, memproses foto \textit{selfie}, dan menghasilkan keluaran foto pribadi tanpa terjadi kegagalan sistem.
+    \item Pengujian Akurasi \\
+    Pengujian ini dilakukan untuk mengukur akurasi sistem dalam menyaring foto pribadi dengan membandingkannya pada \textit{ground truth} yang ada.
+    \item Pengujian Performa \\
+    Pengujian ini dilakukan untuk menghitung waktu rata-rata yang dibutuhkan sistem untuk memproses masukan foto dari pengguna.
+    \item Pengujian Stabilitas \\
+    Pengujian ini dilakukan untuk menguji ketahanan sistem dengan masukan yang rusak untuk memastikan sistem dapat tetap berjalan. 
+\end{enumerate}
 
 
 \subsection{Parameter Keberhasilan}
 
+Parameter keberhasilan diformulasikan dengan menurunkan dari non-fungsional \textit{requirement}. Sistem dinyatakan berhasil jika memenuhi indikator yang ditunjukkan pada Tabel \ref{tbl:indikator keberhasilan}.
+
+\input{table/parameter-keberhasilan.tex}
+
 \section{Analisis Risiko}
+
+Bagian ini akan menjelaskan risiko yang mungkin dapat terjadi dalam pengerjaan tugas akhir ini. Risiko yang teridentifikasi akan dijelaskan penyebab, probabilitas, dampak, dan stategi mitigasinya. Analisis risiko dan mitigasi ditunjukkan pada Tabel \ref{tbl:risiko_mitigasi}.
+
+\input{table/analisis-risiko.tex}

@@ -1,0 +1,51 @@
+\begin{longtable}{@{\extracolsep{\fill}} p{0.8cm} p{3cm} p{3cm} p{2.6cm} p{2.6cm}}
+\caption{Analisis Risiko dan Strategi Mitigasi} \label{tbl:risiko_mitigasi} \\
+\midrule
+\textbf{No.} & \textbf{Risiko Potensial} & \textbf{Penyebab Utama} & \textbf{Dampak} & \textbf{Strategi Mitigasi} \\
+\midrule
+\endfirsthead
+
+\caption[]{Analisis Risiko dan Strategi Mitigasi (lanjutan)} \\
+\midrule
+\textbf{No.} & \textbf{Risiko Potensial} & \textbf{Penyebab Utama} & \textbf{Dampak} & \textbf{Strategi Mitigasi} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\endfoot
+
+\midrule
+\endlastfoot
+
+1 &
+Kegagalan Deteksi Wajah &
+Resolusi foto input terlalu rendah atau wajah terhalang oklusi (masker/kacamata) &
+Akurasi sistem turun drastis (\textit{False Negative} tinggi) &
+Melakukan \textit{upscaling} citra otomatis sebelum deteksi dan menurunkan \textit{confidence threshold} \\
+
+2 &
+\textit{Resource Exhaustion} (OOM) &
+Dataset 1.000 foto melebihi kapasitas memori saat pemrosesan &
+Proses berhenti mendadak (crash) atau perangkat menjadi tidak responsif &
+Menggunakan \textit{batch processing} dan melakukan \textit{resize} foto ke resolusi standar (800px) \\
+
+3 &
+Format Data Korup &
+Kesalahan unduhan atau format file tidak didukung (RAW/HEIC) &
+Sistem \textit{error} saat membaca \textit{file} dan iterasi terhenti &
+Menambahkan \textit{error handling} untuk melewati \textit{file} rusak dan mencatatnya dalam \textit{log} \\
+
+4 &
+Hambatan Komunikasi Pembimbing &
+Jadwal dosen padat atau sulit mencocokkan waktu bimbingan &
+Keterlambatan umpan balik dan risiko revisi yang besar &
+Menyepakati jadwal bimbingan rutin dan mengirim laporan progres secara berkala \\
+
+5 &
+Timeline Tidak Realistis &
+Estimasi waktu terlalu optimistis tanpa memperhitungkan \textit{debugging} &
+Pengerjaan molor, waktu pengujian berkurang, risiko penundaan sidang &
+Menerapkan \textit{buffer time} 1 minggu per fase dan memprioritaskan fitur utama \\
+
+\end{longtable}
