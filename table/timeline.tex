@@ -1,0 +1,60 @@
+\begin{longtable}{@{\extracolsep{\fill}} p{2cm} p{3cm} p{7cm}}
+\caption{Timeline Rencana Implementasi}\label{tbl:timeline} \\
+\midrule
+\textbf{Minggu} & \textbf{Tahap} & \textbf{Kegiatan} \\
+\midrule
+\endfirsthead
+
+\caption[]{Timeline Rencana Implementasi (lanjutan)} \\
+\midrule
+\textbf{Minggu} & \textbf{Tahap} & \textbf{Kegiatan} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{3}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\endfoot
+
+\midrule
+\endlastfoot
+
+% === DATA TIMELINE ===
+
+1--2 & Persiapan Dataset (\textit{Data Preparation}) &
+\begin{itemize}
+    \item Pengumpulan dataset foto untuk skenario pengujian;
+    \item Pelabelan (\textit{annotation}) data secara manual untuk membuat \textit{ground truth}.
+\end{itemize}
+\\
+
+3--5 & Eksplorasi \& Implementasi Algoritma &
+\begin{itemize}
+    \item Implementasi 5 kategori metode \textit{face representation}: Geometri, Holistik, Berbasis Fitur, Hibrida, dan \textit{Deep Learning};
+    \item Pembuatan modul \textit{face detection}, \textit{alignment}, dan \textit{matching};
+    \item Pengukuran awal untuk memilih algoritma terbaik berdasarkan kompleksitas model.
+\end{itemize}
+\\
+
+6--7 & Integrasi Sistem (\textit{System Construction}) &
+\begin{itemize}
+    \item Pembangunan modul \textit{database} untuk menyimpan \textit{embedding} foto;
+    \item Implementasi alur sesuai desain sistem \textit{to-be}.
+\end{itemize}
+\\
+
+8--9 & Pengujian \& Evaluasi (\textit{Testing}) &
+\begin{itemize}
+    \item Pengujian performa berdasarkan parameter keberhasilan;
+    \item Evaluasi sistem berdasarkan kebutuhan non-fungsional.
+\end{itemize}
+\\
+
+10--11 & Dokumentasi \& Pelaporan &
+\begin{itemize}
+    \item Analisis hasil perbandingan antar algoritma;
+    \item Penulisan laporan Tugas Akhir lengkap;
+    \item Persiapan materi presentasi sidang akhir.
+\end{itemize}
+\\
+
+\end{longtable}

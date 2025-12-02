@@ -10,7 +10,7 @@
 
 
 \section{Diagram Konseptual Sistem}
-Dari solusi yang telah dipilih pada bagian sebelumnya, bagian ini akan menjelaskan mengenai perbandingan alur pencarian foto pribadi sebelum dan sesudah pengembangan sistem pencarian foto pribadi berdasarkan \textit{selfie}.
+Dari solusi yang telah dipilih pada bagian sebelumnya, bagian ini akan menjelaskan mengenai perbandingan alur pencarian foto pribadi sebelum dan sesudah pengembangan sistem pencarian foto pribadi berdasarkan \textit{selfie} dari sisi pengguna.
 
 \subsection{Sistem Sebelum (\textit{As-Is})}
 Alur pencarian foto yang konvensional saat ini ditunjukkan pada Gambar \ref{gambar:Alur Sistem As-Is}. Alur dimulai dengan mengakses penyimpanan yang dapat berupa folder/\textit{drive}. Selanjutnya untuk masing-masing \textit{file} foto, akan dicek satu-satu untuk melihat apakah foto yang sedang dibuka tersebut adalah foto pribadi atau bukan. Ketika foto yang dibuka merupakan foto pribadi, foto tersebut akan dipisahkan atau ditandai untuk disimpan pada ruang pernyimpanan yang terpisah. Apabila foto bukan foto pribadi, akan dilanjutkan dengan membuka \textit{file} foto selanjutnya hingga semua foto sudah dicek.
@@ -39,9 +39,33 @@ Sistem pencarian foto pribadi yang diusulkan ditunjukkan pada Gambar \ref{gambar
 
 Alur dimulai dengan memasukkan folder foto dengan mengunggah menggunakan \textit{file .zip} atau dengan tautan untuk \textit{drive}. Kemudian, pengguna melakukan foto \textit{selfie} untuk diunggah kedalam sistem. Dari masukan tersebut, sistem kemudian akan memproses pencarian foto pribadi berdasarkan dengan wajah yang ada di dalam foto \textit{selfie}. Terakhir, keluaran dari sistem adalah folder foto pribadi yang berhasil disaring dari masukan awal.
 
-\subsection{Perbandingan Sistem As-Is dan To-Be}
+\subsection{Perbandingan Sistem \textit{As-Is} dan \textit{To-Be}}
+
+Perbandingan antara sistem konvensional (\textit{As-Is}) dengan sistem yang diusulkan (\textit{To-Be}) ditunjukkan pada Tabel \ref{tbl:perbandingan sistem}.
+
+\input{table/perbandingan-sistem.tex}
 
 \section{Penjelasan Desain Solusi Sistem}
+
+Berdasarkan alur sistem dari sisi pengguna di bagian sebelumnya, alur kerja dimulai dari \textit{preprocessing} yang ditunjukkan oleh Gambar \ref{gambar:Alur Sistem Preprocessing}. Folder atau \textit{drive} yang telah dimasukkan pengguna akan dilakukan pemrosesan oleh model \textit{face recognition}, dimulai dari \textit{face detection}, \textit{face alignment}, dan \textit{face representation}. Hasilnya vektor konversi dari setiap foto akan disimpan pada \textit{database} beserta dengan informasi \textit{bounding box} dan \textit{path file}nya.
+
+\begin{figure}[h] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
+    \centering
+    \captionsetup{justification=centering}
+    	\includegraphics[width=0.7\textwidth]{image/B4-Preprocessing.png}
+    \caption{Alur \textit{Preprocessing} Sistem}
+    \label{gambar:Alur Sistem Preprocessing}
+\end{figure}
+
+\begin{figure}[H] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
+    \centering
+    \captionsetup{justification=centering}
+    	\includegraphics[width=0.7\textwidth]{image/B4-Desain Sistem (Query).png}
+    \caption{Alur Sistem (\textit{query})}
+    \label{gambar:Alur Sistem Query}
+\end{figure}
+
+Setalah \textit{preprocessing} dilakukan, selanjutnya dilakukan penyaringan berdasarkan foto \textit{selfie} yang dimasukkan pengguna sebagai \textit{query}. Foto \textit{selfie} akan diproses oleh model, sehingga bisa didapatkan hasil vektor dari foto tersebut. Hasil tersebut akan dilakukan \textit{face matching} dengan data yang telah ada di dalam \textit{database}. Apabila hasil \textit{matching} itu melebihi \textit{threshold}, foto itu akan ditampilkan sebagai foto pribadi dari pengguna. Semua foto tersebut akan dikumpulkan sebagai keluaran dari \textit{query}. Alur sistem \textit{query} ditunjukkan pada Gambar \ref{gambar:Alur Sistem Query}.
 
 \section{Algoritma \textit{Face Recognition}}
 
@@ -62,5 +86,22 @@ Berdasarkan studi literatur pada Bagian II.3, terdapat lima kategori utama metod
   \item Metode Deep Learning (\textit{Deep Learning Methods})
 \end{enumerate}
 
+Dari berbagai metode tersebut, masing-masing metode memiliki banyak pendekatan. Oleh karena itu, dalam eksplorasi tugas akhir akan membandingkan pendekatan-pendekatan tersebut sehingga mendapatkan pendekatan terbaik disetiap metodenya. Kemudian, pendekatan terbaik disetiap metode akan dibandingkan kembali dengan metode lainnya, sehingga bisa mendapatkan algoritma \textit{face recognition} yang cocok dengan sistem yang dikembangkan. 
+
 \subsection{Parameter Perbandingan}
 
+Pada eksplorasi algoritma solusi, diperlukan parameter perbandingan yang bertujuan untuk menentukan algoritma yang terbaik. Parameter tersebut akan menjadi dasar dipilihnya algoritma yang akan dipilih pada sistem yang akan dibangun. Harapannya parameter tersebut dapat menjadi landasan evaluasi yang objektif dan terukur, sehingga setiap hasil dari algoritma setara dan diukur dalam metrik yang standar.
+
+Dalam perbandingan, jumlah dataset yang digunakan sebagai \textit{test case} sebaiknya standar. Jumlah dataset yang akan digunakan sebagai perbandingan algoritma adalah sebanyak 1000 foto, dengan \textit{test case} yang sama untuk masing-masing algoritma.
+
+\begin{enumerate}
+  \item \textbf{Waktu Komputasi} \\
+  Analisis waktu komputasi akan dilakukan dengan mencakup tahap \textit{preprocessing}, \textit{feature extraction}, dan \textit{matching}. Pendekatan ini bertujuan untuk mengisolasi kinerja algoritma \textit{face representation} yang menjadi fokus dari proses pendukung lainnya. Dengan jumlah dataset \textit{test case} yang standar, hasil dari pengukuran akan menjadi lebih objektif dan setara.
+
+  \item \textbf{Akurasi} \\
+  Selain dari pengukuran waktu, akurasi diperlukan sebagai dasar validitas fungsional sistem. Pengukuran ini mengacu pada metrik standar seperti \textit{True Accept Rate}, \textit{False Accept Rate}, dan sebagainya. Untuk mendukung pengukuran ini, dataset pengujian (\textit{test case}) harus memiliki anotasi label yang valid sebagai kebenaran dasar (\textit{Ground Truth}). Hal ini memastikan bahwa setiap hasil prediksi algoritma dapat dibandingkan secara presisi terhadap identitas yang sebenarnya.
+  
+  \item \textbf{Kompleksitas Model} \\
+  Parameter kompleksitas dievaluasi untuk mengukur viabilitas implementasi (\textit{feasibility}). Terdapat dua pengukuran yang dilakukan, yaitu \textit{memory footprint} dan dependensi perangkat keras (CPU, GPU, dan sebagainya), Hal ini dilakukan untuk memastikan bahwa perbandingan antar algoritma adil dari sisi konsumsi sumber daya. Dengan demikian, dapat ditentukan apakah algoritma tersebut cocok diterapkan pada lingkungan dengan sumber daya terbatas.
+
+\end{enumerate}

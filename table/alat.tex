@@ -1,0 +1,60 @@
+\begin{longtable}{@{\extracolsep{\fill}} l p{3cm} p{3cm} p{6cm}}
+\caption{Alat dan Bahan Penelitian}\label{tbl:alat_bahan} \\
+\midrule
+\textbf{No.} & \textbf{Kategori} & \textbf{Alat/Bahan} & \textbf{Keterangan} \\
+\midrule
+\endfirsthead
+
+\caption[]{Alat dan Bahan Penelitian (lanjutan)} \\
+\midrule
+\textbf{No.} & \textbf{Kategori} & \textbf{Alat/Bahan} & \textbf{Keterangan} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{4}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\endfoot
+
+\midrule
+\endlastfoot
+
+1 & Perangkat Keras & Laptop (\textit{Workstation}) &
+Laptop dengan spesifikasi CPU Intel Core i7, RAM 16 GB, dan SSD yang digunakan untuk pengembangan kode lokal dan dokumentasi \\
+
+2 & Bahasa Pemrograman & Python 3.8+ &
+Bahasa pemrograman utama untuk implementasi sistem, dipilih karena dukungan ekosistem
+\textit{deep learning} dan pemrosesan citra yang lengkap \\
+
+3 & Data & NumPy, Pandas &
+NumPy digunakan untuk operasi matriks pada data citra, sedangkan Pandas untuk manajemen
+\textit{metadata} foto (\textit{path}, ID) \\
+
+4 & Visualisasi & Matplotlib &
+\textit{Library} visualisasi untuk menampilkan hasil pencarian dan pengukuran \\
+
+5 & Citra Digital & OpenCV &
+\textit{Library} utama untuk pemrosesan citra digital, digunakan pada tahap \textit{face detection}
+dan \textit{face alignment} \\
+
+6 & \textit{Deep Learning} & TensorFlow / PyTorch &
+\textit{Framework} untuk membangun dan menjalankan model CNN guna ekstraksi fitur wajah
+(\textit{face representation}) \\
+
+7 & \textit{Machine Learning} & Scikit-learn &
+Digunakan untuk metode komparasi holistik seperti PCA serta perhitungan metrik evaluasi
+(\textit{confusion matrix}) \\
+
+8 & \textit{Integrated Development Environment} & Visual Studio Code / Jupyter Notebook &
+Lingkungan pengembangan untuk penulisan kode, pengujian modul per tahap, dan eksperimen algoritma \\
+
+9 & \textit{Version Control} & Git, GitHub &
+Digunakan untuk manajemen versi kode dan penyimpanan repositori proyek secara daring \\
+
+10 & Komputasi Awan & Google Colab (GPU \textit{Enabled}) &
+Layanan komputasi awan yang menyediakan GPU, untuk mempercepat proses perhitungan fitur wajah jika perangkat lokal tidak memadai \\
+
+11 & Dataset & Dataset Foto Pribadi &
+Dataset sebanyak 1.000 foto dengan variasi pose dan pencahayaan, termasuk foto \textit{selfie} pengguna
+sebagai data \textit{query} untuk \textit{one-shot learning} \\
+
+\end{longtable}
