@@ -5,27 +5,30 @@
 \label{chap:pendahuluan}
 % --- Latar Belakang ---
 \section{Latar Belakang}
-Perkembangan teknologi digital dan penggunaan media penyimpanan berbasis cloud telah menyebabkan peningkatan jumlah data visual, khususnya foto digital. Pasar fotografi digital global diproyeksikan tumbuh dari \$53.14 miliar pada tahun 2024 menjadi \$70.95 miliar pada tahun 2029, didorong oleh lonjakan pengguna ponsel pintar \autocite{TheBusinessResearchCompany2025}. Sejalan dengan itu, pasar penyimpanan cloud global menunjukkan pertumbuhan yang lebih pesat, diperkirakan akan berkembang dari \$161.28 miliar pada tahun 2025 menjadi \$639.40 miliar pada tahun 2032 \autocite{FortuneBusinessInsights2025}. Perkembangan ini membuat pengguna sering memiliki banyak foto yang tersimpan di perangkat pribadi atau layanan seperti Google Drive, OneDrive, dan sebagainya. Hal ini menciptakan permasalahan baru dalam ranah Manajemen Informasi Pribadi (\textit{Personal Information Management}), di mana tantangannya bukan lagi soal keterbatasan ruang, melainkan kesulitan dalam penemuan kembali informasi (\textit{information retrieval}).
 
-Proses pencarian foto secara manual memakan waktu yang lama karena pengguna harus membuka dan memeriksa setiap foto satu per satu. Praktik ini terbukti tidak efisien dan membebani secara kognitif, sehingga menimbulkan kebutuhan akan sebuah sistem yang dapat secara otomatis mengenali dan mengelompokkan foto berdasarkan identitas wajah pengguna.  
+Perkembangan teknologi digital dan penggunaan media penyimpanan berbasis \textit{cloud} telah menyebabkan peningkatan jumlah data visual, khususnya foto digital. Pasar fotografi digital global diproyeksikan tumbuh dari \$53.14 miliar pada tahun 2024 menjadi \$70.95 miliar pada tahun 2029, didorong oleh lonjakan pengguna gawai \autocite{TheBusinessResearchCompany2025}. Pertumbuhan pasar ini mengindikasikan bahwa jumlah foto digital yang ada juga semakin meningkat. Akibatnya, pengguna memiliki banyak foto yang tersimpan di perangkat pribadi atau layanan \textit{cloud} seperti Google Drive, OneDrive, dan sebagainya. Hal ini sejalan dengan pertumbuhan pasar penyimpanan \textit{cloud} global yang memperkirakan akan berkembang dari \$161.28 miliar pada tahun 2025 menjadi \$639.40 miliar pada tahun 2032 \autocite{FortuneBusinessInsights2025}. Perkembangan jumlah foto digital ini menciptakan permasalahan baru mengenai Manajemen Informasi Pribadi (\textit{Personal Information Management}), yang tantangannya bukan lagi soal keterbatasan ruang, tetapi tentang kesulitan dalam penemuan kembali informasi(\textit{information retrieval}).
 
-Dengan kemajuan teknologi \textit{Computer Vision} dan \textit{Machine Learning}, khususnya pada bidang Pengenalan Wajah (\textit{Face Recognition}), memungkinkan untuk mengembangkan sistem yang mampu mendeteksi dan mengidentifikasi wajah seseorang secara otomatis. Pengenalan wajah itu sendiri didefinisikan sebagai metode biometrik untuk mengidentifikasi atau memverifikasi seseorang dengan membandingkan pola fitur wajah mereka. Dalam implementasinya, pengguna cukup mengambil sebuah foto \textit{selfie}, dan sistem akan secara otomatis melakukan pencarian terhadap seluruh foto yang mengandung wajah pengguna di dalam folder atau drive tertentu. Pendekatan ini merupakan aplikasi praktis dari paradigma \textit{one-shot learning}, di mana sistem mampu membuat prediksi yang benar meskipun hanya diberikan satu contoh dari kelas baru, dalam hal ini berarti wajah pengguna \autocite{Albayati2024}
+Dalam konteks foto pribadi (foto yang mengandung wajah pengguna), proses pencarian foto secara manual memakan waktu yang lama karena pengguna harus membuka dan memeriksa setiap foto satu per satu. Praktik ini jelas tidak efisien, sehingga menimbulkan kebutuhan akan sebuah sistem yang dapat secara otomatis mengenali dan mengelompokkan foto berdasarkan identitas wajah pengguna.  
 
-Dalam penelitian ini, dilakukan eksplorasi terhadap berbagai algoritma pengenalan wajah. Meskipun algoritma modern menunjukkan akurasi yang sangat tinggi di lingkungan terkontrol, kinerjanya dapat menurun saat dihadapkan pada skenario aslinya. Eksplorasi ini bertujuan untuk menemukan metode yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pada kondisi foto yang bervariasi, misalnya perbedaan pencahayaan, pose, ekspresi wajah, dan resolusi gambar.
+Dengan kemajuan teknologi \textit{Computer Vision} dan \textit{Machine Learning}, khususnya pada bidang Pengenalan Wajah (\textit{Face Recognition}), memungkinkan untuk dapat mengembangkan sistem yang mampu mendeteksi dan mengidentifikasi wajah seseorang secara otomatis. Pengenalan wajah itu sendiri didefinisikan sebagai metode biometrik untuk mengidentifikasi atau memverifikasi seseorang dengan membandingkan pola fitur wajah mereka. Dalam implementasinya, pengguna cukup mengambil sebuah foto \textit{selfie}, dan sistem akan secara otomatis melakukan pencarian terhadap seluruh foto yang mengandung wajah pengguna di dalam folder atau drive tertentu. Pendekatan ini merupakan aplikasi praktis dari paradigma \textit{one-shot learning}, yang berarti sistem mampu membuat prediksi yang benar meskipun hanya diberikan satu contoh dari kelas baru, dalam hal ini berarti wajah pengguna \autocite{Albayati2024}.
+
+Dalam Tugas Akhir ini, akan dilakukan eksplorasi terhadap berbagai algoritma pengenalan wajah. Meskipun algoritma modern menunjukkan akurasi yang sangat tinggi di lingkungan terkontrol, kinerjanya dapat menurun saat dihadapkan pada skenario aslinya. Eksplorasi ini bertujuan untuk menemukan metode yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pada kondisi foto yang bervariasi, misalnya perbedaan pencahayaan, pose, ekspresi wajah, dan resolusi gambar.
 
 Diharapkan sistem ini dapat memberikan solusi yang efisien dalam proses pencarian foto pribadi, sekaligus memberikan kontribusi pada pengembangan sistem pengenalan wajah yang adaptif dan mudah diterapkan untuk kebutuhan personal maupun organisasi.
 
 % --- Rumusan Masalah ---
 \section{Rumusan Masalah}
-Berdasarkan latar belakang masalah yang telah disusun, maka rumusan masalah yang menjadi fokus pembahasan dalam penyusunan tugas akhir ini adalah sebagai berikut:
-\begin{enumerate}
-\item Bagaimana merancang dan mengimplementasikan sistem pencarian otomatis foto pribadi berbasis pengenalan wajah dengan memanfaatkan satu foto selfie sebagai acuan pencarian (\textit{query})?
-\item Algoritma pengenalan wajah apa yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pengguna pada kondisi foto yang bervariasi, sehingga mampu memberikan hasil pencarian terbaik dalam konteks foto pribadi?
-\end{enumerate}
+Berdasarkan latar belakang masalah yang telah disusun, maka rumusan masalah yang menjadi fokus pembahasan dalam penyusunan Tugas Akhir ini adalah: "Bagaimana merancang dan mengimplementasikan sistem pencarian otomatis foto pribadi berbasis pengenalan wajah dengan memanfaatkan satu foto selfie sebagai acuan pencarian (\textit{query}), dan algoritma pengenalan wajah apa yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pengguna pada kondisi foto yang bervariasi, sehingga mampu memberikan hasil pencarian terbaik dalam konteks foto pribadi?"
+
+Proses pencarian foto pribadi secara konvensional masih sangat manual. Proses iterasi yang dilakukan ketika memeriksa foto satu per satu sangat menghabiskan waktu dan tidak efisien. Permasalahan ini menciptakan peluang untuk mengembangkan sistem yang dapat mempercepat pencarian foto pribadi dari ruang penyimpanan pribadi atau \textit{cloud}.
+
+Urgensi penyelesaian masalah ini cukup tinggi. Akan tetapi, sistem ini sangat dibutuhkan untuk mempercepat proses pencarian. Dengan adanya sistem ini, proses konvensional lama dapat terotomatisasi dengan lebih cepat. Selain itu, hasil dari pencarian menjadi konsisten dan tidak terpengaruhi oleh pengguna.
+
+Solusi yang diusulkan adalah mengembangkan sistem pencarian foto pribadi menggunakan \textit{face recognition} dengan \textit{one-shot learning}. Harapannya sistem dapat digunakan untuk mengotomatisasi proses pencarian dan menghasilkan hasil yang akurat.
 
 % --- Tujuan ---
 \section{Tujuan}
-Berdasarkan rumusan masalah yang telah disusun, maka tujuan dari penyusunan tugas akhir ini adalah sebagai berikut:
+Berdasarkan rumusan masalah yang telah disusun, maka tujuan dari penyusunan Tugas Akhir ini adalah sebagai berikut:
 \begin{enumerate}
 \item Merancang dan melakukan implementasi sistem pencarian otomatis foto pribadi dari folder yang disimpan di perangkat pribadi maupun layanan \textit{cloud}, berbasis \textit{face recognition}, dengan melakukan proses identifikasi dan penyortiran foto secara efisien menggunakan satu foto \textit{selfie} sebagai data acuan (\textit{query}).
 \item Mengeksplorasi dan menentukan algoritma \textit{face recognition} yang paling efektif dan akurat untuk digunakan dalam mendeteksi serta mengenali wajah pengguna pada berbagai kondisi foto, seperti perbedaan pencahayaan, pose, ekspresi, dan resolusi gambar, guna memperoleh hasil pencarian terbaik.
@@ -33,11 +36,11 @@ Berdasarkan rumusan masalah yang telah disusun, maka tujuan dari penyusunan tuga
 
 % --- Batasan Masalah ---
 \section{Batasan Masalah}
-Agar pembahasan dalam tugas akhir ini terarah dan sesuai dengan ruang lingkup penelitian, maka batasan-batasan yang digunakan adalah sebagai berikut:
+Agar pembahasan dalam tugas akhir ini terarah dan sesuai dengan ruang lingkup Tugas Akhir, maka batasan-batasan yang digunakan adalah sebagai berikut:
 \begin{enumerate}
     \item Sistem difokuskan untuk mengenali dan mencari foto yang menampilkan wajah pengguna berdasarkan satu foto \textit{selfie} sebagai acuan (\textit{query}). Sistem tidak dirancang untuk mengenali banyak individu secara bersamaan atau melakukan klasifikasi \textit{multi-person}.
     
-    \item Kualitas foto yang digunakan dalam penelitian diasumsikan memadai agar wajah dapat terdeteksi dengan jelas. Sistem tidak dioptimalkan untuk menangani foto dengan resolusi sangat rendah, pencahayaan ekstrem, wajah buram, atau wajah yang tertutup secara signifikan.
+    \item Kualitas foto yang digunakan dalam Tugas Akhir diasumsikan memadai agar wajah dapat terdeteksi dengan jelas. Sistem tidak dioptimalkan untuk menangani foto dengan resolusi sangat rendah, pencahayaan ekstrem, wajah buram, atau wajah yang tertutup secara signifikan.
     
     % \item Eksplorasi dan implementasi algoritma dalam penelitian ini dibatasi pada beberapa metode yang mewakili pendekatan klasik dan modern dalam \textit{face recognition}, yaitu:
     % \begin{enumerate}[a.]
@@ -50,7 +53,7 @@ Agar pembahasan dalam tugas akhir ini terarah dan sesuai dengan ruang lingkup pe
 
 % --- Metodologi Pengerjaan TA ---
 \section{Metodologi}
-Penelitian ini menggunakan pendekatan kuantitatif dengan metode eksperimental dan rekayasa sistem. Pendekatan kuantitatif dipilih karena penelitian berfokus pada pengukuran performa sistem secara objektif dan numerik, meliputi tingkat akurasi pengenalan wajah, waktu pemrosesan, serta akurasi algoritma terhadap variasi kondisi foto.
+Tugas Akhir ini menggunakan pendekatan kuantitatif dengan metode eksperimental dan rekayasa sistem. Pendekatan kuantitatif dipilih karena Tugas Akhir berfokus pada pengukuran performa sistem secara objektif dan numerik, meliputi tingkat akurasi pengenalan wajah, waktu pemrosesan, serta akurasi algoritma terhadap variasi kondisi foto.
 
 Metode eksperimental digunakan untuk menguji beberapa algoritma pengenalan wajah dengan tujuan menentukan algoritma yang paling efektif dalam konteks pencarian foto pribadi berbasis \textit{face recognition}.
 
@@ -70,5 +73,5 @@ Rekayasa sistem dilakukan dengan menggunakan metodologi \textit{Software Develop
     Tahap ini bertujuan untuk mengukur dan membandingkan performa sistem berdasarkan metrik yang telah ditentukan. Evaluasi dilakukan agar sistem dapat memberikan hasil terbaik dalam melakukan operasi.
     
     \item Dokumentasi dan Analisis Hasil \\
-    Tahap ini mencakup dokumentasi hasil penelitian, pembahasan hasil evaluasi, serta analisis kesesuaian antara tujuan penelitian dan hasil yang diperoleh. Dari hasil analisis, diharapkan kesimpulan yang ditarik dapat menjawab permasalahan utama penelitian ini.
+    Tahap ini mencakup dokumentasi hasil Tugas Akhir, pembahasan hasil evaluasi, serta analisis kesesuaian antara tujuan Tugas Akhir dan hasil yang diperoleh. Dari hasil analisis, diharapkan kesimpulan yang ditarik dapat menjawab permasalahan utama Tugas Akhir ini.
 \end{enumerate}

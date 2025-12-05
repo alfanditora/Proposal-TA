@@ -69,10 +69,10 @@ Setalah \textit{preprocessing} dilakukan, selanjutnya dilakukan penyaringan berd
 
 \section{Algoritma \textit{Face Recognition}}
 
-Berdasarkan hasil solusi, fokus ekspolrasi selanjutnya berada pada penentuan algoritma \textit{face recognition} yang paling akurat.  Bagian ini akan menjelaskan bagian eksplorasi yang akan dibandingkan dari algoritma \textit{face recognition} yang ada.
+Berdasarkan hasil solusi, fokus eksplorasi selanjutnya berada pada penentuan algoritma \textit{face recognition} yang paling akurat.  Bagian ini akan menjelaskan bagian eksplorasi yang akan dibandingkan dari algoritma \textit{face recognition} yang ada.
 
 \subsection{Eksplorasi Algoritma Solusi}
-Seperti yang telah diketahui dari Bagian II.2, \textit{face recognition} terbagi menjadi empat blok komponenen, \textit{face detection}, \textit{preprocessing and alignment}, \textit{face representation}, dan \textit{face matching}. Berdasarkan bagian II.3, dapat didebatkan bahwa komponenen inti dari sistem \textit{face recognition} adalah \textit{face representation}. Komponen tersebut menentukan keberhasilan setiap tahap dalam proses identifikasi maupun verfikasi. Berarti, komponen tersebut memainkan peran penting yang nantinya akan terpengaruh ke tingkat akurasi dan waktu kompleksitas dari algoritma \textit{face recognition}.
+Seperti yang telah diketahui dari Bagian II.2, \textit{face recognition} terbagi menjadi empat blok komponen, \textit{face detection}, \textit{preprocessing and alignment}, \textit{face representation}, dan \textit{face matching}. Berdasarkan bagian II.3, dapat didebatkan bahwa komponenen inti dari sistem \textit{face recognition} adalah \textit{face representation}. Komponen tersebut menentukan keberhasilan setiap tahap dalam proses identifikasi maupun verfikasi. Berarti, komponen tersebut memainkan peran penting yang nantinya akan terpengaruh ke tingkat akurasi dan waktu kompleksitas dari algoritma \textit{face recognition}.
 
 Eksplorasi yang dilakukan dalam algoritma \textit{face recognition} akan dilakukan pada komponen \textit{face representation}. Dalam eksplorasi, akan dilakukan perbandingan baik dari metode tradisional hingga metode yang paling modern. Tujuan eksplorasi ini adalah untuk menemukan metode yang paling efektif dan akurat dalam mendeteksi serta mengenali wajah pada kondisi foto yang bervariasi, sesuai dengan Rumusan Masalah kedua.
 
@@ -92,14 +92,14 @@ Dari berbagai metode tersebut, masing-masing metode memiliki banyak pendekatan. 
 
 Pada eksplorasi algoritma solusi, diperlukan parameter perbandingan yang bertujuan untuk menentukan algoritma yang terbaik. Parameter tersebut akan menjadi dasar dipilihnya algoritma yang akan dipilih pada sistem yang akan dibangun. Harapannya parameter tersebut dapat menjadi landasan evaluasi yang objektif dan terukur, sehingga setiap hasil dari algoritma setara dan diukur dalam metrik yang standar.
 
-Dalam perbandingan, jumlah dataset yang digunakan sebagai \textit{test case} sebaiknya standar. Jumlah dataset yang akan digunakan sebagai perbandingan algoritma adalah sebanyak 1000 foto, dengan \textit{test case} yang sama untuk masing-masing algoritma.
+Dalam perbandingan, jumlah \textit{dataset} yang digunakan sebagai \textit{test case} sebaiknya standar. Jumlah \textit{dataset} yang akan digunakan sebagai perbandingan algoritma adalah sebanyak 1000 foto, dengan \textit{test case} yang sama untuk masing-masing algoritma.
 
 \begin{enumerate}
   \item \textbf{Waktu Komputasi} \\
-  Analisis waktu komputasi akan dilakukan dengan mencakup tahap \textit{preprocessing}, \textit{feature extraction}, dan \textit{matching}. Pendekatan ini bertujuan untuk mengisolasi kinerja algoritma \textit{face representation} yang menjadi fokus dari proses pendukung lainnya. Dengan jumlah dataset \textit{test case} yang standar, hasil dari pengukuran akan menjadi lebih objektif dan setara.
+  Analisis waktu komputasi akan dilakukan dengan mencakup tahap \textit{preprocessing}, \textit{feature extraction}, dan \textit{matching}. Pendekatan ini bertujuan untuk mengisolasi kinerja algoritma \textit{face representation} yang menjadi fokus dari proses pendukung lainnya. Dengan jumlah \textit{dataset} \textit{test case} yang standar, hasil dari pengukuran akan menjadi lebih objektif dan setara.
 
   \item \textbf{Akurasi} \\
-  Selain dari pengukuran waktu, akurasi diperlukan sebagai dasar validitas fungsional sistem. Pengukuran ini mengacu pada metrik standar seperti \textit{True Accept Rate}, \textit{False Accept Rate}, dan sebagainya. Untuk mendukung pengukuran ini, dataset pengujian (\textit{test case}) harus memiliki anotasi label yang valid sebagai kebenaran dasar (\textit{Ground Truth}). Hal ini memastikan bahwa setiap hasil prediksi algoritma dapat dibandingkan secara presisi terhadap identitas yang sebenarnya.
+  Selain dari pengukuran waktu, akurasi diperlukan sebagai dasar validitas fungsional sistem. Pengukuran ini mengacu pada metrik standar seperti \textit{True Accept Rate}, \textit{False Accept Rate}, dan sebagainya. Untuk mendukung pengukuran ini, \textit{dataset} pengujian (\textit{test case}) harus memiliki anotasi label yang valid sebagai kebenaran dasar (\textit{Ground Truth}). Hal ini memastikan bahwa setiap hasil prediksi algoritma dapat dibandingkan secara presisi terhadap identitas yang sebenarnya.
   
   \item \textbf{Kompleksitas Model} \\
   Parameter kompleksitas dievaluasi untuk mengukur viabilitas implementasi (\textit{feasibility}). Terdapat dua pengukuran yang dilakukan, yaitu \textit{memory footprint} dan dependensi perangkat keras (CPU, GPU, dan sebagainya), Hal ini dilakukan untuk memastikan bahwa perbandingan antar algoritma adil dari sisi konsumsi sumber daya. Dengan demikian, dapat ditentukan apakah algoritma tersebut cocok diterapkan pada lingkungan dengan sumber daya terbatas.

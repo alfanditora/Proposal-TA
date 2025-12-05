@@ -16,7 +16,7 @@ Pada kondisi saat ini, pengguna digital sering kali memiliki kumpulan foto yang 
 	\centering
   \captionsetup{justification=centering}
     	\includegraphics[width=0.7\textwidth]{image/B3-Kondisi Saat Ini.png}
-	\caption{Alur Pencarian Foto dari Ruang Renyimpanan}
+	\caption{Alur Pencarian Foto dari Ruang Penyimpanan}
 	\label{gambar:pencarian foto}
 \end{figure}
 
@@ -66,11 +66,11 @@ Setelah melakukan berbagai eksplorasi terhadap peluang penggunaan teknologi untu
     \item \textbf{Pendekatan Berbasis Konten Citra (\textit{Content-Based Image Retrieval} / CBIR)} \\
     Cara kerja pendekatan ini dengan membandingkan karakteristik visual dari foto, seperti warna dominan, tekstur, bentuk, atau pola visual lainnya. Dengan membandingkan karakteristik tersebut, sistem dapat menemukan foto yang secara visual mirip dengan contoh yang diberikan. Kelebihan dari pendekatan ini adalah dapat diterapkan tanpa memerlukan anotasi manual. Kelemahan dari pendekatan ini adalah CBIR hanya dapat mengukur kesamaan visual secara umum, sehingga tidak bisa mengukur kesamaan identitas wajah pengguna. Dua foto yang menampilkan orang berbeda tetapi memiliki pencahayaan atau latar serupa bisa saja dianggap mirip oleh sistem, sehingga tidak cocok untuk kebutuhan pencarian berbasis individu.
     
-    \item \textbf{Pendekatan Berbasis Atribut atau Objek Semantik} \\
+    \item \textbf{Pendekatan Berbasis Atribut atau Objek Semantik (\textit{Semantic-Based Image Retrieval})} \\
     Metode ini memanfaatkan deteksi objek atau atribut tertentu dalam foto, seperti pakaian, latar belakang, atau aktivitas yang sedang dilakukan. Sistem dapat menyaring foto berdasarkan ciri kontekstual, misalnya foto saat memakai kacamata atau foto di pantai. Pendekatan ini mampu mempersempit hasil pencarian, tetapi tidak mampu memastikan identitas pengguna secara biometrik, karena fokusnya bukan pada wajah melainkan konteks visual.
 
-    \item \textbf{Pendekatan Berbasis Pengenalan Wajah (\textit{Face Recognition})} \\ 
-    Pendekatan ini menggunakan teknik \textit{computer vision} dan \textit{machine learning} untuk mendeteksi, mengekstraksi, dan mencocokkan ciri biometrik wajah seseorang. Dengan hanya memberikan satu foto selfie sebagai acuan (\textit{one-shot query}), sistem dapat menemukan dan mengelompokkan semua foto yang mengandung wajah pengguna dalam dataset. Kelebihan utama metode ini adalah kemampuan identifikasi yang spesifik terhadap individu, tingkat akurasi tinggi, serta kemudahan penerapan pada dataset berskala besar. Meskipun memerlukan komputasi yang lebih tinggi dibandingkan pendekatan lain, metode ini paling relevan dan efektif untuk konteks pencarian foto pribadi yang berfokus pada identitas wajah.
+    \item \textbf{Pendekatan Berbasis \textit{Face Recognition} dengan \textit{One-Shot Learning}} \\ 
+    Pendekatan ini menggunakan teknik \textit{computer vision} dan \textit{machine learning} untuk mendeteksi, mengekstraksi, dan mencocokkan ciri biometrik wajah seseorang. Dengan hanya memberikan satu foto selfie sebagai acuan (\textit{one-shot query}), sistem dapat menemukan dan mengelompokkan semua foto yang mengandung wajah pengguna dalam \textit{dataset}. Kelebihan utama metode ini adalah kemampuan identifikasi yang spesifik terhadap individu, tingkat akurasi tinggi, serta kemudahan penerapan pada \textit{dataset} berskala besar. Meskipun memerlukan komputasi yang lebih tinggi dibandingkan pendekatan lain, metode ini paling relevan dan efektif untuk konteks pencarian foto pribadi yang berfokus pada identitas wajah.
 
 \end{enumerate}
 
@@ -80,10 +80,10 @@ Setelah melakukan berbagai eksplorasi terhadap peluang penggunaan teknologi untu
 
 Berdasarkan peluang teknologi yang dijelaskan pada bagian sebelumnya, teknologi yang paling relevan untuk digunakan pada kasus ini adalah \textit{face recognition}. Inti dari permasalah utama adalah identifikasi. Solusi yang dipilih harus mampu mendeteksi dan mengelompokkan foto yang mengandung wajah diri pengguna. Dari ketiga peluang teknologi, hanya \textit{face recognition} yang secara definisi merupakan metode biometrik yang dapat mengidentifikasi atau memverifikasi seseorang dengan membandingkan pola fitur wajah. Ini menjadikan \textit{face recognition} satu-satunya solusi yang secara spesifik menargetkan identitas individu, bukan hanya kemiripan visual umum atau konteks foto.
 
-Selain itu, sistem ini dapat mengimplementasikan konsep \textit{One-Shot Learning} yang dijelaskan pada Bagian II.4. Dalam OSL, sistem harus dapat membuat prediksi yang benar meskipun hanya diberikan satu contoh dari kelas baru. Penggunaan satu foto \textit{selfie} sebagai data acuan \textit{query} untuk membandingkan dengan seluruh kumpulan foto adalah aplikasi langsung dari paradigma OSL. Algoritma \textit{face recognition} modern, seperti yang menggunakan \textit{Sieamese Network} atau \textit{Triplet Loss} memang dirancang untuk mempelajar fungsi kesamaan ini.
+Selain itu, sistem ini dapat mengimplementasikan konsep \textit{One-Shot Learning} yang dijelaskan pada Bagian II.4. Dalam OSL, sistem harus dapat membuat prediksi yang benar meskipun hanya diberikan satu contoh dari kelas baru. Penggunaan satu foto \textit{selfie} sebagai data acuan \textit{query} untuk membandingkan dengan seluruh kumpulan foto adalah aplikasi langsung dari paradigma OSL. Algoritma \textit{face recognition} modern, seperti yang menggunakan \textit{Siamese Network} atau \textit{Triplet Loss} memang dirancang untuk mempelajari fungsi kesamaan ini.
 
 Dua peluang teknologi lain yang sempat dipertimbangkan tidak mampu memenuhi kebutuhan yang telah didefinisikan sebelumnya. Pada CBIR, pendekatan ini hanya mengukur kesamaan berdasarkan karakteristik visual tingkat rendah seperti warna, tekstur, atau bentuk secara umum. CBIR tidak dapat mengukur kesamaan identitas wajah yang spesifik, sehingga gagal memisahkan foto pengguna dengan foto orang lain yang mungkin memiliki latar belakang atau pencahayaan yang mirip. Sedangkan, pendekatan berbasis atribut atau objek semantik, hanya berfokus pada penyaringan berdasarkan konteks atau objek dalam foto (misalnya, mencari foto di pantai, atau foto yang memakai kacamata). Meskipun dapat mempersempit hasil, metode ini tidak mampu memverifikasi identitas pengguna secara biometrik. Analisis antara peluang teknologi dapat dilihat dengan rangkum dan terstruktur di Tabel \ref{tbl:alternatif_solusi}
 
-\input{table/alternatif.tex}
-
 Berdasarkan hasil analisis, pendekatan berbasis \textit{face recognition} dengan \textit{one-shot learning} adalah solusi yang paling relevan dan efektif karena kelebihan utamanya terletak pada kemampuan untuk melakukan identifikasi spesifik individu. Meskipun memerlukan komputasi yang lebih tinggi, metode ini secara langsung menjawab tujuan sistem untuk menyaring dan mengelompokkan foto berdasarkan identitas wajah pengguna. Oleh karena itu, eksplorasi selanjutnya akan difokuskan pada penentuan algoritma \textit{face recognition} yang paling akurat untuk mengatasi variasi kondisi foto.
+
+\input{table/alternatif.tex}

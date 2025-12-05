@@ -1,4 +1,9 @@
-\begin{longtable}{@{\extracolsep{\fill}} p{0.8cm} p{3cm} p{3cm} p{2.6cm} p{2.6cm}}
+\begin{longtable}{@{\extracolsep{\fill}}
+    p{0.8cm}
+    >{\raggedright\arraybackslash}p{3cm}
+    p{3cm}
+    p{2.6cm}
+    p{2.6cm}}
 \caption{Analisis Risiko dan Strategi Mitigasi} \label{tbl:risiko_mitigasi} \\
 \midrule
 \textbf{No.} & \textbf{Risiko Potensial} & \textbf{Penyebab Utama} & \textbf{Dampak} & \textbf{Strategi Mitigasi} \\
@@ -26,7 +31,7 @@ Melakukan \textit{upscaling} citra otomatis sebelum deteksi dan menurunkan \text
 
 2 &
 \textit{Resource Exhaustion} (OOM) &
-Dataset 1.000 foto melebihi kapasitas memori saat pemrosesan &
+\textit{Dataset} 1.000 foto melebihi kapasitas memori saat pemrosesan &
 Proses berhenti mendadak (crash) atau perangkat menjadi tidak responsif &
 Menggunakan \textit{batch processing} dan melakukan \textit{resize} foto ke resolusi standar (800px) \\
 

@@ -63,8 +63,12 @@ Walaupun tahap deteksi dan penyelarasan memainkan peran penting dalam mempersiap
 \subsection{Metode Berbasis Geometri (\textit{Geometry-based Methods})}
 Penelitian awal mengenai pengenalan wajah, seperti yang dilakukan pada tahun 1970-an, berfokus pada metode yang menggunakan teknik pemrosesan citra untuk mencocokkan fitur-fitur sederhana yang menggambarkan geometri wajah. \textcite{Trigueros2018} menjelaskan bahwa metode ini mendeteksi lokasi serangkaian \textit{landmark} wajah (seperti mata, hidung, dan mulut) dan mengukur posisi relatif serta jarak di antara titik-titik tersebut. Meskipun metode ini memiliki keunggulan dalam kecepatan komputasi dan penggunaan memori yang rendah, akurasi pengenalannya umumnya lebih rendah dibandingkan metode yang menggunakan informasi gradien citra \autocite{Trigueros2018}.
 
+Karakteristik utama dari metode ini dimulai dengan tahap ekstraksi fitur lokal, di mana sistem secara otomatis mendeteksi lokasi titik-titik \textit{fiducial} penting pada wajah, seperti koordinat mata, hidung, mulut, dan kontur dagu, untuk menangkap konfigurasi topologis wajah \autocite{Brunelli1993}. Berdasarkan titik-titik tersebut, sistem kemudian menghitung serangkaian parameter geometris yang mencakup pengukuran kuantitatif berupa jarak antar fitur (seperti jarak interokular), ukuran komponen wajah, serta sudut-sudut relasional antar fitur \autocite{Zhao2003}. Seluruh data pengukuran ini selanjutnya dikompilasi menjadi sebuah vektor fitur numerik—seperti vektor 35-dimensi yang digunakan dalam eksperimen terkait—yang merepresentasikan struktur wajah secara ringkas untuk digunakan dalam proses klasifikasi.
+
 \subsection{Metode Holistik (\textit{Holistic Methods})}
 Metode holistik merepresentasikan wajah menggunakan keseluruhan area wajah sebagai input. Pendekatan ini sering kali bekerja dengan memproyeksikan citra wajah ke dalam ruang berdimensi rendah untuk membuang detail yang tidak perlu. Salah satu pendekatan paling populer adalah \textit{Principal Component Analysis} (PCA) atau yang dikenal sebagai \textit{eigenfaces}, serta \textit{Linear Discriminant Analysis} (LDA) atau \textit{Fisherfaces} \autocite{Trigueros2018}.
+
+PCA bekerja dengan mencari proyeksi linier yang memaksimalkan total scatter (total sebaran) dari semua gambar wajah dalam database. Secara teknis, ini optimal untuk merekonstruksi gambar (\textit{reconstruction}) dari basis dimensi rendah \autocite{Belhumeur1997}. Wajah direpresentasikan sebagai kombinasi linier dari basis \textit{images} (\textit{eigenfaces}). Pengenalan dilakukan dengan mencocokkan bobot proyeksi citra baru dengan bobot yang ada di \textit{database} \autocite{Zhao2003}.
 
 LDA bertujuan untuk mencari matriks proyeksi $W$ yang memaksimalkan varians antar-kelas (\textit{between-class}) sekaligus meminimalkan varians dalam-kelas (\textit{within-class}). Berdasarkan \textcite{Trigueros2018}, fungsi tujuan untuk LDA dapat dituliskan pada Persamaan \ref{eq:lda}:
 
@@ -73,7 +77,7 @@ W^{*} = \arg \max_{W} \frac{|W^{T}S_{b}W|}{|W^{T}S_{w}W|}
 \label{eq:lda}
 \end{equation}
 
-dimana $S_{b}$ adalah matriks \textit{scatter} antar-kelas dan $S_{w}$ adalah matriks \textit{scatter} dalam-kelas. Metode holistik lain yang juga dikembangkan meliputi \textit{Support Vector Machines} (SVM) dan \textit{Sparse Representation-based Classification} (SRC).
+$S_{b}$ adalah matriks \textit{scatter} antar-kelas dan $S_{w}$ adalah matriks \textit{scatter} dalam-kelas. Metode holistik lain yang juga dikembangkan meliputi \textit{Support Vector Machines} (SVM) dan \textit{Sparse Representation-based Classification} (SRC).
 
 \subsection{Metode Berbasis Fitur (\textit{Feature-based Methods})}
 Berbeda dengan metode holistik, metode berbasis fitur memanfaatkan fitur lokal yang diekstraksi dari berbagai lokasi pada citra wajah. Metode ini cenderung lebih tangguh (\textit{robust}) terhadap variasi lokal seperti ekspresi wajah atau pencahayaan \autocite{Trigueros2018}. Contoh populer dari metode ini termasuk \textit{Local Binary Patterns} (LBP), SIFT, dan Gabor wavelets.
@@ -100,6 +104,11 @@ Sebagai contoh, \textcite{Trigueros2018} menyebutkan metode yang menggunakan rep
 dimana suku pertama adalah kesalahan rekonstruksi antara fitur dimensi tinggi $X$ dan fitur dimensi rendah $Y$, serta suku kedua memaksakan \textit{sparsity} pada matriks proyeksi $B$ \autocite{Trigueros2018}.
 
 \subsection{Metode Deep Learning (\textit{Deep Learning Methods})}
+
+Metode berbasis \textit{neural networks} (yang menjadi fondasi \textit{deep learning}) didefinisikan sebagai pendekatan yang menggunakan arsitektur jaringan saraf tiruan untuk mempelajari representasi wajah secara otomatis dari data pelatihan. Pendekatan ini bertujuan untuk menawarkan kemampuan generalisasi yang lebih besar melalui pembelajaran (\textit{learning}) dibandingkan dengan metode linier standar seperti PCA atau LDA \autocite{Zhao2003}.
+
+Dalam perkembangannya, \textit{deep learning} digunakan untuk mengekstraksi fitur tingkat tinggi yang lebih bermakna (\textit{meaningful high-level features}) secara langsung dari citra, yang membantu menjembatani kesenjangan semantik (\textit{semantic gap}) yang sering dihadapi oleh metode ekstraksi fitur tradisional \autocite{qazanfari2023}.
+
 Metode \textit{Deep Learning}, khususnya \textit{Convolutional Neural Networks} (CNN), telah menjadi standar terkini dalam pengenalan wajah karena kemampuannya untuk belajar fitur yang tangguh dari data pelatihan berskala besar \autocite{Trigueros2018}. Salah satu aspek kunci dalam pelatihan CNN adalah fungsi \textit{loss}.
 
 Selain \textit{Softmax loss} standar, \textit{Triplet Loss} digunakan untuk memisahkan jarak antara pasangan positif dan negatif dengan margin tertentu. Kondisi yang harus dipenuhi untuk setiap \textit{triplet} dijelaskan pada Persamaan \ref{eq:triplet}:
@@ -111,9 +120,37 @@ Selain \textit{Softmax loss} standar, \textit{Triplet Loss} digunakan untuk memi
 
 dimana $x_{a}$ adalah citra \textit{anchor}, $x_{p}$ adalah citra dari subjek yang sama (\textit{positive}), $x_{n}$ adalah citra dari subjek berbeda (\textit{negative}), dan $\alpha$ adalah margin \autocite{Trigueros2018}. Perkembangan terbaru juga memperkenalkan margin aditif atau multiplikatif ke dalam fungsi \textit{softmax} untuk meningkatkan kemampuan diskriminatif model.
 
+
 \section{\textit{One-Shot Learning}}
-\textit{One-Shot Learning} (OSL) adalah sebuah pendekatan yang meniru kemampuan unik manusia untuk mengenali wajah hanya dengan satu kali lihat. Dalam banyak skenario dunia nyata, pengumpulan dataset gambar wajah berskala besar sering kali sulit dilakukan. Pada umumnya, tugas identifikasi hanya memiliki satu atau sedikit sampel per individu. Metode \textit{deep learning} konvensional seperti \textit{Convolutional Neural Network} (CNN) biasanya memerlukan data pelatihan dalam jumlah besar dan cenderung berkinerja buruk jika dilatih dengan input yang sangat terbatas \autocite{Albayati2024}.
+\textit{One-Shot Learning} (OSL) adalah sebuah pendekatan yang meniru kemampuan unik manusia untuk mengenali wajah hanya dengan satu kali lihat. Dalam banyak skenario dunia nyata, pengumpulan \textit{dataset} gambar wajah berskala besar sering kali sulit dilakukan. Pada umumnya, tugas identifikasi hanya memiliki satu atau sedikit sampel per individu. Metode \textit{deep learning} konvensional seperti \textit{Convolutional Neural Network} (CNN) biasanya memerlukan data pelatihan dalam jumlah besar dan cenderung berkinerja buruk jika dilatih dengan input yang sangat terbatas \autocite{Albayati2024}.
 
 Algoritma OSL dirancang untuk mengatasi masalah kelangkaan data tersebut. Dalam konteks pengenalan wajah, OSL bertujuan untuk mengembangkan sistem yang mampu belajar dan mengenali individu hanya dari satu gambar (atau satu sampel) per kelas.
 
 Salah satu teknik yang umum digunakan untuk mencapai hal ini adalah \textit{Siamese Network}. Alih-alih melakukan klasifikasi gambar secara langsung, \textit{Siamese Network} dilatih untuk mempelajari fungsi kesamaan (\textit{similarity function}). Jaringan ini menerima dua gambar sebagai masukan dan menghasilkan skor yang menunjukkan seberapa mirip kedua gambar tersebut, apakah berasal dari orang yang sama atau tidak \autocite{Albayati2024}.
+
+
+\section{\textit{Content-Based Image Retrieval} (CBIR)}
+
+\textit{Content-Based Image Retrieval} (CBIR) didefinisikan sebagai sistem krusial dalam bidang \textit{computer vision} yang memungkinkan pencarian dan temu kembali gambar berdasarkan analisis konten visualnya secara langsung, alih-alih bergantung pada metadata tekstual seperti kata kunci atau \textit{tag}. Dalam konteks ini, konten visual diterjemahkan sebagai fitur tingkat rendah (\textit{low-level features}) yang diekstraksi dari citra, yang meliputi karakteristik warna, tekstur, dan bentuk. Secara operasional, mekanisme kerja CBIR dimulai dengan tahap ekstraksi fitur di mana atribut visual diambil untuk membangun representasi konten dari gambar tersebut. Algoritma sistem kemudian membandingkan representasi fitur dari gambar \textit{query} (\textit{input} pengguna) dengan representasi fitur dari seluruh gambar yang tersimpan dalam basis data. Proses ini bertujuan untuk mengambil gambar-gambar yang memiliki tingkat kemiripan visual tertinggi dengan kueri. Meskipun efektif dalam mengidentifikasi kesamaan visual, kinerja CBIR sering kali dihadapkan pada tantangan \textit{semantic gap}, yaitu kesenjangan antara fitur visual tingkat rendah dan konsep semantik tingkat tinggi yang dipahami manusia, sehingga integrasi metode seperti \textit{Relevance Feedback} (RF) sering diperlukan untuk menjembatani kesenjangan tersebut dan meningkatkan akurasi pencarian \autocite{qazanfari2023}.
+
+\section{\textit{Semantic-Based Image Retrieval}}
+
+\textit{Semantic Image Retrieval} didefinisikan sebagai pendekatan strategis untuk menjembatani kesenjangan semantik (\textit{semantic gap}) antara fitur visual tingkat rendah (seperti tekstur dan warna) dengan konsep semantik tingkat tinggi yang dipahami manusia, yang bertujuan menciptakan proses temu kembali yang tidak hanya akurat tetapi juga dapat dijelaskan (\textit{interpretable}). Metode utama yang diterapkan untuk mencapai hal ini adalah \textit{Bag-of-Words Association Mapping}, yang diawali dengan tahapan ekstraksi fitur mendalam melalui teknik pemotongan citra dua kali (\textit{double slicing}) guna menangkap detail objek kecil, diikuti dengan pengambilan fitur tekstur menggunakan \textit{Local Binary Pattern} (LBP) dan fitur warna berbasis momen.
+
+Fitur-fitur visual yang telah diekstraksi kemudian didiskretisasi menjadi "kata-kata visual" (\textit{visual words}) menggunakan algoritma \textit{K-means clustering} untuk membentuk kamus fitur. Untuk menerjemahkan kata-kata visual ini menjadi makna, sistem menerapkan algoritma \textit{Improved FP-Growth} yang berfungsi menambang aturan asosiasi yang kuat antara pola visual dan label semantik, lengkap dengan perhitungan nilai kepercayaan (\textit{confidence}) untuk setiap aturan. Pada tahap akhir, proses pencarian dilakukan dengan menghitung kemiripan menggunakan metode TF-IDF yang dikombinasikan dengan probabilitas aturan, serta diperkuat oleh mekanisme umpan balik (\textit{feedback mechanism}) yang secara dinamis mengoreksi bobot probabilitas semantik pada hasil yang salah untuk meningkatkan presisi pencarian di masa depan \autocite{LiJingwen2023}.
+
+\section{Penelitian yang Relevan}
+
+Bagian ini akan menjelaskan mengenai penilitian sebelumnya yang relevan dengan Tugas Akhir ini. Penilitian tersebut akan digunakan sebagai fondasi sebagai \textit{research gap} untuk meningkatkan keterbaruan Tugas Akhir ini.
+
+\subsection{Metode Konvensional dan Relevansinya pada Sumber Daya Terbatas}
+
+Penelitian terdahulu yang dirangkum oleh \textcite{Zhao2003} mengklasifikasikan metode pengenalan wajah ke dalam pendekatan holistik, berbasis fitur, dan hibrida. Metode holistik seperti \textit{Principal Component Analysis} (PCA) dinilai efisien untuk rekonstruksi wajah namun memiliki kelemahan signifikan terhadap variasi pencahayaan, sedangkan \textit{Linear Discriminant Analysis} (LDA) terbukti lebih unggul dalam membedakan identitas asalkan tersedia sampel pelatihan yang cukup . Di sisi lain, metode berbasis fitur seperti \textit{Elastic Bunch Graph Matching} (EBGM) dianggap lebih tangguh terhadap perubahan pose, meskipun kinerjanya sangat bergantung pada akurasi deteksi fitur lokal yang sering kali tidak stabil.
+
+Meskipun metode-metode ini sering dianggap usang dalam literatur modern, penilitian ini menyoroti bahwa metode seperti LDA memiliki keunggulan teoritis dalam kondisi komputasi ringan dan sampel terbatas. Namun, literatur yang ada kurang mengeksplorasi secara empiris apakah efisiensi dan kesederhanaan metode konvensional ini masih menjadikannya solusi terbaik (paling optimal) dibandingkan metode modern untuk skenario dengan sumber daya perangkat keras yang sangat terbatas atau ketika data pelatihan sangat sedikit.
+
+\subsection{Metode \textit{Deep Learning} dan Tantangan Efisiensi}
+
+Penilitian oleh \textcite{Trigueros2018} menyoroti pergeseran paradigma dari fitur buatan tangan (\textit{hand-crafted}) menuju fitur yang dipelajari secara otomatis (\textit{learned features}) melalui \textit{deep learning}. Mereka menegaskan bahwa metode tradisional telah banyak digantikan oleh \textit{convolutional neural networks} (CNNs) karena kemampuan CNN mempelajari fitur diskriminatif dari data berskala besar, yang membuatnya jauh lebih tangguh terhadap variasi ekstrem seperti pose dan ekspresi wajah (\textit{faces in-the-wild}) . Arsitektur seperti \textit{DeepFace} dan \textit{FaceNet} telah menetapkan standar baru dalam akurasi pengenalan wajah.
+
+Penilitian ini menunjukkan superioritas akurasi CNN. Penilitian ini juga mencatat adanya ketergantungan yang tinggi pada komputasi berat dan \textit{dataset} masif (jutaan gambar) untuk menghindari \textit{overfitting}. Kesenjangan yang muncul di sini adalah kurangnya studi komparatif yang mengevaluasi apakah kompleksitas dan biaya tinggi dari CNN benar-benar sepadan dengan peningkatan akurasinya untuk aplikasi skala kecil. Studi ini diperlukan untuk mengisi celah tersebut dengan membandingkan secara langsung metode \textit{deep learning} melawan metode tradisional pada secara adil (\textit{dataset} yang sama dan terbatas) untuk menentukan metode mana yang paling efektif secara keseluruhan, bukan hanya yang paling akurat.

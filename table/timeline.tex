@@ -1,4 +1,7 @@
-\begin{longtable}{@{\extracolsep{\fill}} p{2cm} p{3cm} p{7cm}}
+\begin{longtable}{@{\extracolsep{\fill}}
+    >{\raggedright\arraybackslash}p{2cm}
+    >{\raggedright\arraybackslash}p{3cm}
+    >{\raggedright\arraybackslash}p{7cm}}
 \caption{Timeline Rencana Implementasi}\label{tbl:timeline} \\
 \midrule
 \textbf{Minggu} & \textbf{Tahap} & \textbf{Kegiatan} \\
@@ -18,11 +21,9 @@
 \midrule
 \endlastfoot
 
-% === DATA TIMELINE ===
-
-1--2 & Persiapan Dataset (\textit{Data Preparation}) &
+1--2 & Persiapan \textit{Dataset} (\textit{Data Preparation}) &
 \begin{itemize}
-    \item Pengumpulan dataset foto untuk skenario pengujian;
+    \item Pengumpulan \textit{dataset} foto untuk skenario pengujian;
     \item Pelabelan (\textit{annotation}) data secara manual untuk membuat \textit{ground truth}.
 \end{itemize}
 \\
