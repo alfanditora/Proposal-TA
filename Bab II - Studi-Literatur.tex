@@ -89,7 +89,7 @@ Dalam penggunaan histogram deskriptor LBP, kemiripan antara dua vektor fitur $a$
 \label{eq:chisquare}
 \end{equation}
 
-dimana $w_{i}$ adalah bobot yang mengontrol kontribusi koefisien ke-$i$ dari vektor fitur \autocite{Trigueros2018}.
+$w_{i}$ adalah bobot yang mengontrol kontribusi koefisien ke-$i$ dari vektor fitur \autocite{Trigueros2018}.
 
 \subsection{Metode Hibrida (\textit{Hybrid Methods})}
 Metode hibrida menggabungkan teknik dari metode holistik dan berbasis fitur untuk mendapatkan keuntungan dari kedua pendekatan tersebut. Pendekatan hibrida yang paling umum adalah mengekstraksi fitur lokal (seperti LBP atau SIFT) dan kemudian memproyeksikannya ke dalam sub-ruang berdimensi rendah yang diskriminatif menggunakan PCA atau LDA \autocite{Trigueros2018}.
@@ -101,7 +101,7 @@ Sebagai contoh, \textcite{Trigueros2018} menyebutkan metode yang menggunakan rep
 \label{eq:hybridopt}
 \end{equation}
 
-dimana suku pertama adalah kesalahan rekonstruksi antara fitur dimensi tinggi $X$ dan fitur dimensi rendah $Y$, serta suku kedua memaksakan \textit{sparsity} pada matriks proyeksi $B$ \autocite{Trigueros2018}.
+Suku pertama adalah kesalahan rekonstruksi antara fitur dimensi tinggi $X$ dan fitur dimensi rendah $Y$, serta suku kedua memaksakan \textit{sparsity} pada matriks proyeksi $B$ \autocite{Trigueros2018}.
 
 \subsection{Metode Deep Learning (\textit{Deep Learning Methods})}
 
@@ -118,7 +118,7 @@ Selain \textit{Softmax loss} standar, \textit{Triplet Loss} digunakan untuk memi
 \label{eq:triplet}
 \end{equation}
 
-dimana $x_{a}$ adalah citra \textit{anchor}, $x_{p}$ adalah citra dari subjek yang sama (\textit{positive}), $x_{n}$ adalah citra dari subjek berbeda (\textit{negative}), dan $\alpha$ adalah margin \autocite{Trigueros2018}. Perkembangan terbaru juga memperkenalkan margin aditif atau multiplikatif ke dalam fungsi \textit{softmax} untuk meningkatkan kemampuan diskriminatif model.
+$x_{a}$ adalah citra \textit{anchor}, $x_{p}$ adalah citra dari subjek yang sama (\textit{positive}), $x_{n}$ adalah citra dari subjek berbeda (\textit{negative}), dan $\alpha$ adalah margin \autocite{Trigueros2018}. Perkembangan terbaru juga memperkenalkan margin aditif atau multiplikatif ke dalam fungsi \textit{softmax} untuk meningkatkan kemampuan diskriminatif model.
 
 
 \section{\textit{One-Shot Learning}}
@@ -137,7 +137,7 @@ Salah satu teknik yang umum digunakan untuk mencapai hal ini adalah \textit{Siam
 
 \textit{Semantic Image Retrieval} didefinisikan sebagai pendekatan strategis untuk menjembatani kesenjangan semantik (\textit{semantic gap}) antara fitur visual tingkat rendah (seperti tekstur dan warna) dengan konsep semantik tingkat tinggi yang dipahami manusia, yang bertujuan menciptakan proses temu kembali yang tidak hanya akurat tetapi juga dapat dijelaskan (\textit{interpretable}). Metode utama yang diterapkan untuk mencapai hal ini adalah \textit{Bag-of-Words Association Mapping}, yang diawali dengan tahapan ekstraksi fitur mendalam melalui teknik pemotongan citra dua kali (\textit{double slicing}) guna menangkap detail objek kecil, diikuti dengan pengambilan fitur tekstur menggunakan \textit{Local Binary Pattern} (LBP) dan fitur warna berbasis momen.
 
-Fitur-fitur visual yang telah diekstraksi kemudian didiskretisasi menjadi "kata-kata visual" (\textit{visual words}) menggunakan algoritma \textit{K-means clustering} untuk membentuk kamus fitur. Untuk menerjemahkan kata-kata visual ini menjadi makna, sistem menerapkan algoritma \textit{Improved FP-Growth} yang berfungsi menambang aturan asosiasi yang kuat antara pola visual dan label semantik, lengkap dengan perhitungan nilai kepercayaan (\textit{confidence}) untuk setiap aturan. Pada tahap akhir, proses pencarian dilakukan dengan menghitung kemiripan menggunakan metode TF-IDF yang dikombinasikan dengan probabilitas aturan, serta diperkuat oleh mekanisme umpan balik (\textit{feedback mechanism}) yang secara dinamis mengoreksi bobot probabilitas semantik pada hasil yang salah untuk meningkatkan presisi pencarian di masa depan \autocite{LiJingwen2023}.
+Fitur-fitur visual yang telah diekstraksi kemudian dipecah menjadi kata-kata visual (\textit{visual words}) menggunakan algoritma \textit{K-means clustering} untuk membentuk kamus fitur. Untuk menerjemahkan kata-kata visual ini menjadi makna, sistem menerapkan algoritma \textit{Improved FP-Growth} yang berfungsi menambang aturan asosiasi yang kuat antara pola visual dan label semantik, lengkap dengan perhitungan nilai kepercayaan (\textit{confidence}) untuk setiap aturan. Pada tahap akhir, proses pencarian dilakukan dengan menghitung kemiripan menggunakan metode TF-IDF yang dikombinasikan dengan probabilitas aturan, serta diperkuat oleh mekanisme umpan balik (\textit{feedback mechanism}) yang secara dinamis mengoreksi bobot probabilitas semantik pada hasil yang salah untuk meningkatkan presisi pencarian di masa depan \autocite{LiJingwen2023}.
 
 \section{Penelitian yang Relevan}
 
